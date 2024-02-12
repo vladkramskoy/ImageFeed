@@ -211,46 +211,60 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iP3-3e-svF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8k-zv-fvN">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="132"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8k-zv-fvN">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gq4-7S-8JB">
-                                        <rect key="frame" x="8" y="8" width="48" height="48"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="4wt-dw-EFC"/>
-                                            <constraint firstAttribute="width" constant="48" id="fkg-sT-daL"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="nav_back_button_white"/>
-                                        <connections>
-                                            <action selector="didTapBackButton" destination="zec-If-VIP" eventType="touchUpInside" id="neY-Iy-rxT"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="f8k-zv-fvN" secondAttribute="bottom" id="3hu-Zn-lLF"/>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="top" secondItem="iP3-3e-svF" secondAttribute="top" id="LfI-XA-Eqx"/>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="leading" secondItem="iP3-3e-svF" secondAttribute="leading" id="ckt-bn-zaR"/>
-                                    <constraint firstAttribute="trailing" secondItem="f8k-zv-fvN" secondAttribute="trailing" id="qqm-k7-e6U"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="bottom" secondItem="vPT-ne-9zN" secondAttribute="bottom" constant="375" id="Bec-3X-4lk"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="trailing" secondItem="vPT-ne-9zN" secondAttribute="trailing" constant="375" id="MDK-69-VXf"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="leading" secondItem="vPT-ne-9zN" secondAttribute="leading" id="Ted-Hi-AfN"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="top" secondItem="vPT-ne-9zN" secondAttribute="top" id="o3H-p2-bAF"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="vPT-ne-9zN"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QF7-0g-B8n"/>
+                                <connections>
+                                    <outlet property="delegate" destination="zec-If-VIP" id="eN7-xZ-6CX"/>
+                                </connections>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gq4-7S-8JB" userLabel="Back Button">
+                                <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="4wt-dw-EFC"/>
+                                    <constraint firstAttribute="width" constant="48" id="fkg-sT-daL"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="nav_back_button_white"/>
+                                <connections>
+                                    <action selector="didTapBackButton" destination="zec-If-VIP" eventType="touchUpInside" id="neY-Iy-rxT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0K-iQ-88J" userLabel="Sharing Button">
+                                <rect key="frame" x="162.66666666666666" y="726" width="50" height="50"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="sharing_button"/>
+                                <connections>
+                                    <action selector="didTapSharingButton:" destination="zec-If-VIP" eventType="touchUpInside" id="HYO-Y0-FDi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ch2-im-vIx"/>
                         <color key="backgroundColor" name="YP Black (iOS)"/>
                         <constraints>
                             <constraint firstItem="iP3-3e-svF" firstAttribute="trailing" secondItem="ch2-im-vIx" secondAttribute="trailing" id="6vg-Vm-odZ"/>
                             <constraint firstItem="iP3-3e-svF" firstAttribute="bottom" secondItem="QBJ-Rw-woQ" secondAttribute="bottom" id="7s6-9b-vgy"/>
-                            <constraint firstItem="gq4-7S-8JB" firstAttribute="leading" secondItem="ch2-im-vIx" secondAttribute="leading" constant="8" id="NnX-Oq-koJ"/>
+                            <constraint firstItem="ch2-im-vIx" firstAttribute="bottom" secondItem="Z0K-iQ-88J" secondAttribute="bottom" constant="36" id="CDd-GI-6g6"/>
                             <constraint firstItem="iP3-3e-svF" firstAttribute="leading" secondItem="ch2-im-vIx" secondAttribute="leading" id="TP3-OV-i3G"/>
-                            <constraint firstItem="gq4-7S-8JB" firstAttribute="top" secondItem="ch2-im-vIx" secondAttribute="top" constant="8" id="Vco-Xt-XoR"/>
+                            <constraint firstItem="Z0K-iQ-88J" firstAttribute="centerX" secondItem="ch2-im-vIx" secondAttribute="centerX" id="dfR-xT-LXc"/>
+                            <constraint firstItem="gq4-7S-8JB" firstAttribute="leading" secondItem="ch2-im-vIx" secondAttribute="leading" constant="8" id="ihS-OR-4as"/>
                             <constraint firstItem="iP3-3e-svF" firstAttribute="top" secondItem="QBJ-Rw-woQ" secondAttribute="top" id="mNx-Gh-MgI"/>
+                            <constraint firstItem="gq4-7S-8JB" firstAttribute="top" secondItem="ch2-im-vIx" secondAttribute="top" constant="8" id="xfx-Pl-rxs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mdE-4w-FSy"/>
                     <connections>
                         <outlet property="imageView" destination="f8k-zv-fvN" id="A3P-KT-WoD"/>
+                        <outlet property="scrollView" destination="iP3-3e-svF" id="o6U-Ec-kyw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AyR-7K-G0U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -264,6 +278,7 @@
         <image name="likeButtonOn" width="44" height="44"/>
         <image name="logout_button" width="44" height="44"/>
         <image name="nav_back_button_white" width="24" height="24"/>
+        <image name="sharing_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="75" height="49"/>
         <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Background (iOS)">
