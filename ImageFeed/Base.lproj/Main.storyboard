@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -126,75 +127,10 @@
                     <view key="view" contentMode="scaleToFill" id="Khu-9R-1Nz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="ITF-UQ-hA1">
-                                <rect key="frame" x="16" y="76" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="3AN-Ty-nd3"/>
-                                    <constraint firstAttribute="width" constant="70" id="H3O-hq-SVD"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="35"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76u-MX-L4V">
-                                <rect key="frame" x="315" y="89" width="44" height="44"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="logout_button"/>
-                                <connections>
-                                    <action selector="didTapLogoutButton:" destination="XQE-ds-utF" eventType="touchUpInside" id="LVL-ia-l6c"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYA-wW-F40">
-                                <rect key="frame" x="16" y="154" width="343" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <color key="textColor" name="YP White (iOS)"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ekaterina_nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xm2-6X-Bxd">
-                                <rect key="frame" x="16" y="189" width="343" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" name="YP Gray (iOS)"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, world!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2u-bf-5O7">
-                                <rect key="frame" x="16" y="213" width="343" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" name="YP White (iOS)"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Llk-UL-tVG"/>
-                        <color key="backgroundColor" name="YP Black (iOS)"/>
-                        <constraints>
-                            <constraint firstItem="ITF-UQ-hA1" firstAttribute="top" secondItem="Llk-UL-tVG" secondAttribute="top" constant="26" id="6Om-0g-yu2"/>
-                            <constraint firstItem="ITF-UQ-hA1" firstAttribute="leading" secondItem="Llk-UL-tVG" secondAttribute="leading" constant="16" id="6nz-Gw-nCy"/>
-                            <constraint firstItem="iYA-wW-F40" firstAttribute="top" secondItem="ITF-UQ-hA1" secondAttribute="bottom" constant="8" id="HuR-x4-v5K"/>
-                            <constraint firstItem="Xm2-6X-Bxd" firstAttribute="trailing" secondItem="U2u-bf-5O7" secondAttribute="trailing" id="XCp-iy-6eN"/>
-                            <constraint firstItem="iYA-wW-F40" firstAttribute="leading" secondItem="ITF-UQ-hA1" secondAttribute="leading" id="XYf-rk-rKk"/>
-                            <constraint firstItem="iYA-wW-F40" firstAttribute="trailing" secondItem="Xm2-6X-Bxd" secondAttribute="trailing" id="bDT-3D-LFk"/>
-                            <constraint firstItem="Llk-UL-tVG" firstAttribute="trailing" secondItem="iYA-wW-F40" secondAttribute="trailing" constant="16" id="dcr-YH-iJp"/>
-                            <constraint firstItem="U2u-bf-5O7" firstAttribute="leading" secondItem="Xm2-6X-Bxd" secondAttribute="leading" id="f0d-HN-OHe"/>
-                            <constraint firstItem="76u-MX-L4V" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ITF-UQ-hA1" secondAttribute="trailing" id="fmx-tq-Jlh"/>
-                            <constraint firstItem="U2u-bf-5O7" firstAttribute="top" secondItem="Xm2-6X-Bxd" secondAttribute="bottom" constant="8" id="gjb-CG-DTK"/>
-                            <constraint firstItem="76u-MX-L4V" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ITF-UQ-hA1" secondAttribute="trailing" id="iH1-vW-0gS"/>
-                            <constraint firstItem="76u-MX-L4V" firstAttribute="top" secondItem="Llk-UL-tVG" secondAttribute="top" constant="39" id="jDd-kt-uez"/>
-                            <constraint firstItem="Llk-UL-tVG" firstAttribute="trailing" secondItem="76u-MX-L4V" secondAttribute="trailing" constant="16" id="jNS-aV-9Mq"/>
-                            <constraint firstItem="Xm2-6X-Bxd" firstAttribute="leading" secondItem="iYA-wW-F40" secondAttribute="leading" id="qmQ-xw-5Kx"/>
-                            <constraint firstItem="Xm2-6X-Bxd" firstAttribute="top" secondItem="iYA-wW-F40" secondAttribute="bottom" constant="8" id="yoK-hz-Hlh"/>
-                        </constraints>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="6Vi-dJ-NY6"/>
-                    <connections>
-                        <outlet property="avatarImageView" destination="ITF-UQ-hA1" id="pmM-kG-8FF"/>
-                        <outlet property="descriptionLabel" destination="U2u-bf-5O7" id="B9B-gn-Qo0"/>
-                        <outlet property="loginNameLabel" destination="Xm2-6X-Bxd" id="ghA-RO-KkV"/>
-                        <outlet property="logoutButton" destination="76u-MX-L4V" id="2Ug-SV-vEL"/>
-                        <outlet property="nameLabel" destination="iYA-wW-F40" id="5kK-d8-eNn"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOR-Ua-NuB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -274,9 +210,7 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
-        <image name="avatar" width="70" height="70"/>
         <image name="likeButtonOn" width="44" height="44"/>
-        <image name="logout_button" width="44" height="44"/>
         <image name="nav_back_button_white" width="24" height="24"/>
         <image name="sharing_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="75" height="49"/>
@@ -287,11 +221,11 @@
         <namedColor name="YP Black (iOS)">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="YP Gray (iOS)">
-            <color red="0.68199998140335083" green="0.68599998950958252" blue="0.70599997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="YP White (iOS)">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
