@@ -28,7 +28,6 @@ final class ImagesListViewController: UIViewController {
             let viewController = segue.destination as! SingleImageViewController
             let indexPatch = sender as! IndexPath
             let image = UIImage(named: photosName[indexPatch.row])
-//            _ = viewController.view
             viewController.image = image
         } else {
             super.prepare(for: segue, sender: sender)
@@ -48,7 +47,7 @@ extension ImagesListViewController {
         cell.dateLabel.text = dateFormatter.string(from: Date())
         
         let isLaked = indexPath.row % 2 == 0
-        let likeImage = isLaked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
+        let likeImage = isLaked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
     }
 }

@@ -70,7 +70,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ce5-Rj-QXI" userLabel="Like Button">
                                                     <rect key="frame" x="315" y="4" width="44" height="44"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="likeButtonOn"/>
+                                                    <state key="normal" image="like_button_on"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" name="YP Background (iOS)"/>
@@ -148,14 +148,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8k-zv-fvN">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="bottom" secondItem="vPT-ne-9zN" secondAttribute="bottom" constant="375" id="Bec-3X-4lk"/>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="trailing" secondItem="vPT-ne-9zN" secondAttribute="trailing" constant="375" id="MDK-69-VXf"/>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="leading" secondItem="vPT-ne-9zN" secondAttribute="leading" id="Ted-Hi-AfN"/>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="top" secondItem="vPT-ne-9zN" secondAttribute="top" id="o3H-p2-bAF"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="centerX" secondItem="vPT-ne-9zN" secondAttribute="centerX" id="5bh-so-ZLo"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="leading" secondItem="QF7-0g-B8n" secondAttribute="leading" id="6hb-cF-sbH"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="top" secondItem="QF7-0g-B8n" secondAttribute="top" id="KU0-kI-7G7"/>
+                                    <constraint firstItem="QF7-0g-B8n" firstAttribute="trailing" secondItem="f8k-zv-fvN" secondAttribute="trailing" id="cKu-FC-15u"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="centerY" secondItem="vPT-ne-9zN" secondAttribute="centerY" id="i6G-fr-E99"/>
+                                    <constraint firstItem="QF7-0g-B8n" firstAttribute="bottom" secondItem="f8k-zv-fvN" secondAttribute="bottom" id="v57-i9-YKk"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="vPT-ne-9zN"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QF7-0g-B8n"/>
@@ -210,7 +212,7 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
-        <image name="likeButtonOn" width="44" height="44"/>
+        <image name="like_button_on" width="44" height="44"/>
         <image name="nav_back_button_white" width="24" height="24"/>
         <image name="sharing_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="75" height="49"/>
