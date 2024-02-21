@@ -25,8 +25,10 @@ final class ImagesListViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) { // Метод используется для подготовки к переходу на другой экран
         if segue.identifier == ShowSingleImageSegueIdentifier {
-            let viewController = segue.destination as! SingleImageViewController
-            let indexPatch = sender as! IndexPath
+            let viewController = segue.destination as? SingleImageViewController
+            let indexPatch = sender as? IndexPath
+            guard let viewController = viewController else { return }
+            guard let indexPatch = indexPatch else { return }
             let image = UIImage(named: photosName[indexPatch.row])
             viewController.image = image
         } else {
@@ -38,7 +40,7 @@ final class ImagesListViewController: UIViewController {
 // MARK: - Extensions
 
 extension ImagesListViewController {
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+    private func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         
         if let image = UIImage(named: photosName[indexPath.row]) {
             cell.cellImage.image = image
