@@ -136,6 +136,56 @@
             </objects>
             <point key="canvasLocation" x="1354" y="227"/>
         </scene>
+        <!--Auth View Controller-->
+        <scene sceneID="ife-as-tfW">
+            <objects>
+                <viewController id="WoO-Fv-ZTC" customClass="AuthViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Hq-gh-0AV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="auth_screen_logo" translatesAutoresizingMaskIntoConstraints="NO" id="i7C-hK-1rF">
+                                <rect key="frame" x="157.66666666666666" y="376" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="0Uj-22-yiq"/>
+                                    <constraint firstAttribute="width" constant="60" id="lDs-Ys-pbd"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmS-xL-YhY">
+                                <rect key="frame" x="16" y="628" width="343" height="60"/>
+                                <color key="backgroundColor" name="YP White (iOS)"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="CmK-GW-oDQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Войти">
+                                    <color key="titleColor" name="YP Black (iOS)"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hm0-z9-fYx"/>
+                        <color key="backgroundColor" name="YP Black (iOS)"/>
+                        <constraints>
+                            <constraint firstItem="hm0-z9-fYx" firstAttribute="trailing" secondItem="zmS-xL-YhY" secondAttribute="trailing" constant="16" id="2Kk-XD-dWa"/>
+                            <constraint firstItem="i7C-hK-1rF" firstAttribute="centerX" secondItem="9Hq-gh-0AV" secondAttribute="centerX" id="D2D-tu-xxW"/>
+                            <constraint firstItem="i7C-hK-1rF" firstAttribute="centerY" secondItem="9Hq-gh-0AV" secondAttribute="centerY" id="df1-mW-uyl"/>
+                            <constraint firstAttribute="bottom" secondItem="zmS-xL-YhY" secondAttribute="bottom" constant="124" id="dhJ-L5-SnJ"/>
+                            <constraint firstItem="zmS-xL-YhY" firstAttribute="leading" secondItem="hm0-z9-fYx" secondAttribute="leading" constant="16" id="kzS-zh-8KD"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="03c-Tj-KfC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t48-9L-Bbn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3146" y="329"/>
+        </scene>
         <!--Single Image View Controller-->
         <scene sceneID="hIQ-Z0-yS2">
             <objects>
@@ -209,9 +259,28 @@
             </objects>
             <point key="canvasLocation" x="2213.5999999999999" y="-437.4384236453202"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mf2-ev-k6p">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VKf-I4-lVi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PbA-RR-f5z">
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WoO-Fv-ZTC" kind="relationship" relationship="rootViewController" id="4kZ-SN-nPr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hfK-Df-h1g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2350" y="329"/>
+        </scene>
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
+        <image name="auth_screen_logo" width="60" height="60"/>
         <image name="like_button_on" width="44" height="44"/>
         <image name="nav_back_button_white" width="24" height="24"/>
         <image name="sharing_button" width="50" height="50"/>
