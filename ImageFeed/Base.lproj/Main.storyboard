@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OXe-cF-68W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VKf-I4-lVi">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -152,10 +152,10 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmS-xL-YhY">
-                                <rect key="frame" x="16" y="628" width="343" height="60"/>
+                                <rect key="frame" x="16" y="640" width="343" height="48"/>
                                 <color key="backgroundColor" name="YP White (iOS)"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="CmK-GW-oDQ"/>
+                                    <constraint firstAttribute="height" constant="48" id="CmK-GW-oDQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -168,6 +168,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="KBs-p9-c2i" kind="show" identifier="ShowWebView" id="7Qa-jM-7QJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hm0-z9-fYx"/>
@@ -176,7 +179,7 @@
                             <constraint firstItem="hm0-z9-fYx" firstAttribute="trailing" secondItem="zmS-xL-YhY" secondAttribute="trailing" constant="16" id="2Kk-XD-dWa"/>
                             <constraint firstItem="i7C-hK-1rF" firstAttribute="centerX" secondItem="9Hq-gh-0AV" secondAttribute="centerX" id="D2D-tu-xxW"/>
                             <constraint firstItem="i7C-hK-1rF" firstAttribute="centerY" secondItem="9Hq-gh-0AV" secondAttribute="centerY" id="df1-mW-uyl"/>
-                            <constraint firstAttribute="bottom" secondItem="zmS-xL-YhY" secondAttribute="bottom" constant="124" id="dhJ-L5-SnJ"/>
+                            <constraint firstItem="hm0-z9-fYx" firstAttribute="bottom" secondItem="zmS-xL-YhY" secondAttribute="bottom" constant="90" id="dhJ-L5-SnJ"/>
                             <constraint firstItem="zmS-xL-YhY" firstAttribute="leading" secondItem="hm0-z9-fYx" secondAttribute="leading" constant="16" id="kzS-zh-8KD"/>
                         </constraints>
                     </view>
@@ -185,6 +188,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t48-9L-Bbn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3146" y="329"/>
+        </scene>
+        <!--Web View View Controller-->
+        <scene sceneID="Dfb-g1-7Pb">
+            <objects>
+                <viewController id="KBs-p9-c2i" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vXs-IT-MOa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E72-0U-aCT">
+                                <rect key="frame" x="0.0" y="94" width="375" height="718"/>
+                                <color key="backgroundColor" name="YP White (iOS)"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ldT-cd-hKY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="E72-0U-aCT" secondAttribute="trailing" id="3hl-fB-ekO"/>
+                            <constraint firstAttribute="bottom" secondItem="E72-0U-aCT" secondAttribute="bottom" id="Y9C-Lv-AJx"/>
+                            <constraint firstItem="E72-0U-aCT" firstAttribute="top" secondItem="ldT-cd-hKY" secondAttribute="top" id="tH3-UN-g3p"/>
+                            <constraint firstItem="E72-0U-aCT" firstAttribute="leading" secondItem="vXs-IT-MOa" secondAttribute="leading" id="z2L-ht-t8D"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="TAd-U0-KUP"/>
+                    <connections>
+                        <outlet property="webView" destination="E72-0U-aCT" id="94h-Ar-EUv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="seN-zn-5SW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3895" y="329"/>
         </scene>
         <!--Single Image View Controller-->
         <scene sceneID="hIQ-Z0-yS2">
