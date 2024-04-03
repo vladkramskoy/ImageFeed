@@ -8,6 +8,7 @@ protocol WebViewViewControllerDelegate: AnyObject {
 
 class WebViewViewController: UIViewController {
     @IBOutlet private var webView: WKWebView!
+    @IBOutlet private var progressView: UIProgressView!
     
     weak var delegate: WebViewViewControllerDelegate?
     
