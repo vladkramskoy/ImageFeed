@@ -1,6 +1,6 @@
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     private lazy var avatarImageView = {
         let photoImage = UIImage(named: "avatar")
         let avatarImageView = UIImageView()
