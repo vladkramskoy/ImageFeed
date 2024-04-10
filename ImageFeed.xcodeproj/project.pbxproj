@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D6D91A82BC6BE4D00A457FB /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6D91A72BC6BE4D00A457FB /* OAuthTokenResponseBody.swift */; };
+		8D6D91AA2BC6E8FA00A457FB /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6D91A92BC6E8FA00A457FB /* OAuth2TokenStorage.swift */; };
 		8D6F892D2B3ADF3D00866619 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F892C2B3ADF3D00866619 /* ImagesListCell.swift */; };
 		8D7217C92B8B2FDF0023EB63 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7217C82B8B2FDF0023EB63 /* Constants.swift */; };
 		8D7B5FFC2B8B720B0069FFF4 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B5FFB2B8B720B0069FFF4 /* AuthViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		8D6D91A72BC6BE4D00A457FB /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
+		8D6D91A92BC6E8FA00A457FB /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		8D6F892C2B3ADF3D00866619 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		8D7217C82B8B2FDF0023EB63 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8D7B5FFB2B8B720B0069FFF4 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			children = (
 				8D8E62722BC416220013FEA9 /* OAuth2Service.swift */,
 				8D6D91A72BC6BE4D00A457FB /* OAuthTokenResponseBody.swift */,
+				8D6D91A92BC6E8FA00A457FB /* OAuth2TokenStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				8D8E62762BC469E10013FEA9 /* URLSession+data.swift in Sources */,
 				8D7B5FFC2B8B720B0069FFF4 /* AuthViewController.swift in Sources */,
 				8D7B60002B8B7EF60069FFF4 /* WebViewViewController.swift in Sources */,
+				8D6D91AA2BC6E8FA00A457FB /* OAuth2TokenStorage.swift in Sources */,
 				8DCBDC262B24C09A001620E7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

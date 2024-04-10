@@ -1,6 +1,6 @@
 import Foundation
 
-class OAuth2Service {
+final class OAuth2Service {
     
     func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard let baseURL = URL(string: "https://unsplash.com") else {
@@ -38,7 +38,11 @@ class OAuth2Service {
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                    print(response)
+                    
+                    let oauth2TokenStorage = OAuth2TokenStorage()
+                    oauth2TokenStorage.token = response.accessToken
+                    let token = oauth2TokenStorage.token
+                    print(token!)
                 } catch {
                     print("Error: \(error.localizedDescription)")
                 }
