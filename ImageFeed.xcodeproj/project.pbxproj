@@ -11,6 +11,8 @@
 		8D7217C92B8B2FDF0023EB63 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7217C82B8B2FDF0023EB63 /* Constants.swift */; };
 		8D7B5FFC2B8B720B0069FFF4 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B5FFB2B8B720B0069FFF4 /* AuthViewController.swift */; };
 		8D7B60002B8B7EF60069FFF4 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B5FFF2B8B7EF60069FFF4 /* WebViewViewController.swift */; };
+		8D8E62732BC416220013FEA9 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8E62722BC416220013FEA9 /* OAuth2Service.swift */; };
+		8D8E62762BC469E10013FEA9 /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8E62752BC469E10013FEA9 /* URLSession+data.swift */; };
 		8D9351D62B63ECAA00B61E2B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9351D52B63ECAA00B61E2B /* ProfileViewController.swift */; };
 		8DCBDC242B24C09A001620E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBDC232B24C09A001620E7 /* AppDelegate.swift */; };
 		8DCBDC262B24C09A001620E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBDC252B24C09A001620E7 /* SceneDelegate.swift */; };
@@ -26,6 +28,8 @@
 		8D7217C82B8B2FDF0023EB63 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8D7B5FFB2B8B720B0069FFF4 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8D7B5FFF2B8B7EF60069FFF4 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		8D8E62722BC416220013FEA9 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
+		8D8E62752BC469E10013FEA9 /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
 		8D9351D52B63ECAA00B61E2B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8DCBDC202B24C09A001620E7 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DCBDC232B24C09A001620E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +79,22 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		8D8E62712BC415E40013FEA9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8D8E62722BC416220013FEA9 /* OAuth2Service.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8D8E62742BC469B60013FEA9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8D8E62752BC469E10013FEA9 /* URLSession+data.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		8DCBDC172B24C09A001620E7 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +114,8 @@
 		8DCBDC222B24C09A001620E7 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				8D8E62742BC469B60013FEA9 /* Helpers */,
+				8D8E62712BC415E40013FEA9 /* Services */,
 				8D6F89272B3ADE2A00866619 /* ImagesList */,
 				8D6676E52B6A5931002C0C75 /* SingleImageView */,
 				8DE130712B64264A00953FD2 /* Profile */,
@@ -189,11 +211,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DCBDC282B24C09A001620E7 /* ImagesListViewController.swift in Sources */,
+				8D8E62732BC416220013FEA9 /* OAuth2Service.swift in Sources */,
 				8D6F892D2B3ADF3D00866619 /* ImagesListCell.swift in Sources */,
 				8D9351D62B63ECAA00B61E2B /* ProfileViewController.swift in Sources */,
 				8DCBDC242B24C09A001620E7 /* AppDelegate.swift in Sources */,
 				8D7217C92B8B2FDF0023EB63 /* Constants.swift in Sources */,
 				8DE85A382B6A660800A2B146 /* SingleImageViewController.swift in Sources */,
+				8D8E62762BC469E10013FEA9 /* URLSession+data.swift in Sources */,
 				8D7B5FFC2B8B720B0069FFF4 /* AuthViewController.swift in Sources */,
 				8D7B60002B8B7EF60069FFF4 /* WebViewViewController.swift in Sources */,
 				8DCBDC262B24C09A001620E7 /* SceneDelegate.swift in Sources */,

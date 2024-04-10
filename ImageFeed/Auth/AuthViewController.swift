@@ -16,11 +16,6 @@ final class AuthViewController: UIViewController {
         } else {
             super.prepare(for: segue, sender: sender)
         }
-        
-        
-//        let authViewController = AuthViewController()
-//        let webViewViewController = WebViewViewController()
-//        webViewViewController.delegate = authViewController
     }
 
     private func configureBackButton() {
@@ -34,6 +29,7 @@ final class AuthViewController: UIViewController {
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         //TODO: process code
+        //Аутентификация успешна, авторизационный код получен, нужно вызвать функцию fetchOAuthToken
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {

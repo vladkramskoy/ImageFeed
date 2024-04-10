@@ -84,15 +84,15 @@ extension WebViewViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let code = code(from: navigationAction) {
+        print("avigationAction:", navigationAction.request)
+        if let code = code(from: navigationAction) { // Срабатывает при каждом навигационном действии
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-            decisionHandler(.cancel)
+            decisionHandler(.cancel) // Если поймали код авторизации, блокируем навигацию, т.к больше тут показывать ничего не нужно
         } else {
-            decisionHandler(.allow)
+            decisionHandler(.allow) // Разрешаем навигацию пользователю пока не авторизуется
         }
-        
     }
-    private func code(from navigationAction: WKNavigationAction) -> String? {
+    private func code(from navigationAction: WKNavigationAction) -> String? { // Извлекаем авторизационный код
         if
             let url = navigationAction.request.url,
             let urlComponents = URLComponents(string: url.absoluteString),
