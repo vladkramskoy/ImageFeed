@@ -13,7 +13,7 @@ class OAuth2Service {
             + "&&client_secret=\(SecretKey)"
             + "&&redirect_uri=\(RedirectURI)"
             + "&&code=\(code)"
-            + "&&grant_type=autorization_code",
+            + "&&grant_type=authorization_code",
             relativeTo: baseURL
         ) else {
             print("Invalid URL")
@@ -30,14 +30,23 @@ class OAuth2Service {
         guard let request = makeOAuthTokenRequest(code: code) else {
             return
         }
+        
         let task = URLSession.shared.data(for: request) { result in // Ответ у POST запроса будет обработан этим методом
             switch result {
             case .success(let data):
-                print("УСПЕХ!", data)
+                print("OK. Токен доступа получен", data)
+                do {
+                    let decoder = JSONDecoder()
+                    let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
+                    print(response)
+                } catch {
+                    print("Error: \(error.localizedDescription)")
+                }
             case .failure(let error):
-                print("НЕУДАЧА!", error)
+                print("FAIL. Токен доступа не был получен", error)
             }
         }
+        task.resume()
     }
 }
 

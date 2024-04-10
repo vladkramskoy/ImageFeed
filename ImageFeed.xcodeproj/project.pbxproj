@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D6D91A82BC6BE4D00A457FB /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6D91A72BC6BE4D00A457FB /* OAuthTokenResponseBody.swift */; };
 		8D6F892D2B3ADF3D00866619 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F892C2B3ADF3D00866619 /* ImagesListCell.swift */; };
 		8D7217C92B8B2FDF0023EB63 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7217C82B8B2FDF0023EB63 /* Constants.swift */; };
 		8D7B5FFC2B8B720B0069FFF4 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B5FFB2B8B720B0069FFF4 /* AuthViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D6D91A72BC6BE4D00A457FB /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
 		8D6F892C2B3ADF3D00866619 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		8D7217C82B8B2FDF0023EB63 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8D7B5FFB2B8B720B0069FFF4 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				8D8E62722BC416220013FEA9 /* OAuth2Service.swift */,
+				8D6D91A72BC6BE4D00A457FB /* OAuthTokenResponseBody.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			files = (
 				8DCBDC282B24C09A001620E7 /* ImagesListViewController.swift in Sources */,
 				8D8E62732BC416220013FEA9 /* OAuth2Service.swift in Sources */,
+				8D6D91A82BC6BE4D00A457FB /* OAuthTokenResponseBody.swift in Sources */,
 				8D6F892D2B3ADF3D00866619 /* ImagesListCell.swift in Sources */,
 				8D9351D62B63ECAA00B61E2B /* ProfileViewController.swift in Sources */,
 				8DCBDC242B24C09A001620E7 /* AppDelegate.swift in Sources */,

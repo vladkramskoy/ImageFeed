@@ -89,6 +89,7 @@ extension WebViewViewController: WKNavigationDelegate {
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel) // Если поймали код авторизации, блокируем навигацию, т.к больше тут показывать ничего не нужно
         } else {
+            delegate?.webViewViewControllerDidCancel(self)
             decisionHandler(.allow) // Разрешаем навигацию пользователю пока не авторизуется
         }
     }
@@ -96,12 +97,14 @@ extension WebViewViewController: WKNavigationDelegate {
         if
             let url = navigationAction.request.url,
             let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == "/oatch/authorize/native",
+            urlComponents.path == "/oauth/authorize/native",
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: { $0.name == "code" })
         {
+            print("Авторизационный код получен")
             return codeItem.value
         } else {
+            print("Авторизационный код не найден")
             return nil
         }
                 
