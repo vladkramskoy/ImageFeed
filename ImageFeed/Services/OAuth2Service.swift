@@ -26,7 +26,7 @@ final class OAuth2Service {
         return request
     }
     
-    func fetchOAuthToken(code: String) {
+    func fetchOAuthToken(code: String, completion: @escaping (Swift.Result<String, Error>) -> Void ) {
         guard let request = makeOAuthTokenRequest(code: code) else {
             return
         }
@@ -38,16 +38,18 @@ final class OAuth2Service {
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                    
+
                     let oauth2TokenStorage = OAuth2TokenStorage()
                     oauth2TokenStorage.token = response.accessToken
-                    let token = oauth2TokenStorage.token
-                    print(token!)
+                    if let token = oauth2TokenStorage.token {
+                        completion(.success(token))
+                    }
                 } catch {
                     print("Error: \(error.localizedDescription)")
                 }
             case .failure(let error):
                 print("FAIL. Токен доступа не был получен", error)
+                completion(.failure(error))
             }
         }
         task.resume()
