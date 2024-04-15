@@ -1,7 +1,13 @@
 import UIKit
 
+protocol AuthViewControllerDelegate: AnyObject {
+    func didAuthenticate(_ vc: AuthViewController)
+}
+
 final class AuthViewController: UIViewController {
     private let ShowWebViewIdentifier = "ShowWebView"
+    
+    weak var delegate: AuthViewControllerDelegate?
     
     override func viewDidLoad() {
         configureBackButton()
@@ -28,19 +34,19 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        let oauth2Service = OAuth2Service()
-        oauth2Service.fetchOAuthToken(code: code) { result in
+        vc.dismiss(animated: true)
+        
+        OAuth2Service.shared.fetchOAuthToken(code: code) { result in
             switch result {
             case .success(let token):
                 print("Токен: \(token)")
+                self.delegate?.didAuthenticate(self)
             case .failure(let error):
                 print(error)
             }
         }
-        print("Пользователь авторизован")
     }
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
-        print("Пользователь не авторизован")
     }
 }

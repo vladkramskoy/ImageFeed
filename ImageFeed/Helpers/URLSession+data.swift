@@ -20,11 +20,14 @@ extension URLSession {
                     fulfillCompletionOnTheMainThread(.success(data))
                 } else {
                     fulfillCompletionOnTheMainThread(.failure(NetworkError.httpStatusCode(statusCode)))
+                    print("Error: \(statusCode)")
                 }
             } else if let error = error {
                 fulfillCompletionOnTheMainThread(.failure(NetworkError.urlRequestError(error)))
+                print("Error: \(error)")
             } else {
                 fulfillCompletionOnTheMainThread(.failure(NetworkError.urlSessionError))
+                print("Url session error")
             }
         })
         return task

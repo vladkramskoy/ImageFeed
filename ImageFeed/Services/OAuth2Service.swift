@@ -1,6 +1,8 @@
 import Foundation
 
 final class OAuth2Service {
+    static let shared = OAuth2Service()
+    private init() {}
     
     func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard let baseURL = URL(string: "https://unsplash.com") else {
@@ -31,10 +33,10 @@ final class OAuth2Service {
             return
         }
         
-        let task = URLSession.shared.data(for: request) { result in // Ответ у POST запроса будет обработан этим методом
+        let task = URLSession.shared.data(for: request) { result in
             switch result {
             case .success(let data):
-                print("OK. Токен доступа получен", data)
+                print("SUCCESS. The access token received", data)
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
@@ -48,7 +50,7 @@ final class OAuth2Service {
                     print("Error: \(error.localizedDescription)")
                 }
             case .failure(let error):
-                print("FAIL. Токен доступа не был получен", error)
+                print("FAIL. The access token was not received", error)
                 completion(.failure(error))
             }
         }

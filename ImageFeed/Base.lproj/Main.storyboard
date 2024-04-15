@@ -13,7 +13,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ab8-WG-Zql">
             <objects>
-                <tabBarController id="OXe-cF-68W" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="OXe-cF-68W" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SzN-yo-AcB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -169,7 +169,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="KBs-p9-c2i" kind="show" identifier="ShowWebView" id="7Qa-jM-7QJ"/>
+                                    <segue destination="KBs-p9-c2i" kind="presentation" identifier="ShowWebView" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="7Qa-jM-7QJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -198,7 +198,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E72-0U-aCT">
-                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" name="YP White (iOS)"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -206,7 +206,7 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.050000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="FH3-cl-N15">
-                                <rect key="frame" x="0.0" y="44" width="375" height="4"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="4"/>
                                 <color key="progressTintColor" name="YP Black (iOS)"/>
                             </progressView>
                         </subviews>
@@ -312,8 +312,17 @@
                     <view key="view" contentMode="scaleToFill" id="cAd-Yi-xpm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="q3o-7L-Fef">
+                                <rect key="frame" x="150" y="367" width="75" height="78"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="95m-C0-daF"/>
                         <color key="backgroundColor" name="YP Black (iOS)"/>
+                        <constraints>
+                            <constraint firstItem="q3o-7L-Fef" firstAttribute="centerY" secondItem="cAd-Yi-xpm" secondAttribute="centerY" id="HfL-qS-q9V"/>
+                            <constraint firstItem="q3o-7L-Fef" firstAttribute="centerX" secondItem="cAd-Yi-xpm" secondAttribute="centerX" id="Z48-39-aKb"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="VKf-I4-lVi" kind="presentation" identifier="showAuthenticationScreen" modalPresentationStyle="fullScreen" id="L9x-tF-Rjn"/>
@@ -321,7 +330,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nN3-Ee-m8L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-313" y="-1196"/>
+            <point key="canvasLocation" x="-314.39999999999998" y="-1196.305418719212"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mf2-ev-k6p">
@@ -347,6 +356,7 @@
         <image name="0" width="200" height="132"/>
         <image name="auth_screen_logo" width="60" height="60"/>
         <image name="like_button_on" width="44" height="44"/>
+        <image name="logo" width="75" height="78"/>
         <image name="nav_back_button_white" width="24" height="24"/>
         <image name="sharing_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="75" height="49"/>

@@ -59,7 +59,7 @@ final class WebViewViewController: UIViewController {
     
     private func loadAuthView() {
         guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
-            print("Ошибка при создании URLComponents")
+            print("Error creating URLComponents")
             return
         }
         
@@ -71,7 +71,7 @@ final class WebViewViewController: UIViewController {
         ]
         
         guard let url = urlComponents.url else {
-            print("Ошибка: urlComponents равен nil")
+            print("URLComponents is equal to nil")
             return
         }
         
@@ -85,14 +85,14 @@ extension WebViewViewController: WKNavigationDelegate {
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         print("avigationAction:", navigationAction.request)
-        if let code = code(from: navigationAction) { // Срабатывает при каждом навигационном действии
+        if let code = code(from: navigationAction) {
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-            decisionHandler(.cancel) // Если поймали код авторизации, блокируем навигацию, т.к больше тут показывать ничего не нужно
+            decisionHandler(.cancel)
         } else {
-            decisionHandler(.allow) // Разрешаем навигацию пользователю пока не авторизуется
+            decisionHandler(.allow)
         }
     }
-    private func code(from navigationAction: WKNavigationAction) -> String? { // Извлекаем авторизационный код
+    private func code(from navigationAction: WKNavigationAction) -> String? {
         if
             let url = navigationAction.request.url,
             let urlComponents = URLComponents(string: url.absoluteString),
@@ -100,10 +100,10 @@ extension WebViewViewController: WKNavigationDelegate {
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: { $0.name == "code" })
         {
-            print("Авторизационный код получен")
+            print("The authorization code has been received")
             return codeItem.value
         } else {
-            print("Авторизационный код не найден")
+            print("The authorization code was not found")
             return nil
         }
                 

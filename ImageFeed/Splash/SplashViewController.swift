@@ -7,10 +7,47 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if let token = oauth2TokenStorage.token {
-            print("Токен найден, нужно обработать дальнейшую логику работы приложения")
+            switchToTabBarController()
         } else {
-            print("Токен не найден. Нужно перенаправить пользователя на экран авторизации")
             performSegue(withIdentifier: "showAuthenticationScreen", sender: nil)
         }
+    }
+    
+    private func switchToTabBarController() {
+        guard let window = UIApplication.shared.windows.first else {
+            assertionFailure("Invalid window configuration")
+            return
+        }
+        
+        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
+            .instantiateViewController(withIdentifier: "TabBarViewController")
+        
+        window.rootViewController = tabBarController
+    }
+}
+
+extension SplashViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAuthenticationScreen" {
+            
+            guard
+                let navigationController = segue.destination as? UINavigationController,
+                let authViewController = navigationController.viewControllers[0] as? AuthViewController
+            else {
+                assertionFailure("Failed to prepare for \("showAuthenticationScreen")")
+                return
+            }
+            
+            authViewController.delegate = self
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
+}
+
+extension SplashViewController: AuthViewControllerDelegate {
+    func didAuthenticate(_ vc: AuthViewController) {
+        vc.dismiss(animated: true)
+        switchToTabBarController()
     }
 }
