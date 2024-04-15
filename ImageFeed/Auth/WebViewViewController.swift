@@ -89,7 +89,6 @@ extension WebViewViewController: WKNavigationDelegate {
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel) // Если поймали код авторизации, блокируем навигацию, т.к больше тут показывать ничего не нужно
         } else {
-            delegate?.webViewViewControllerDidCancel(self)
             decisionHandler(.allow) // Разрешаем навигацию пользователю пока не авторизуется
         }
     }

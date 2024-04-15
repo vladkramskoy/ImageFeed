@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D47DEE22BCD4AE400B3DD5B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47DEE12BCD4AE400B3DD5B /* SplashViewController.swift */; };
 		8D6D91A82BC6BE4D00A457FB /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6D91A72BC6BE4D00A457FB /* OAuthTokenResponseBody.swift */; };
 		8D6D91AA2BC6E8FA00A457FB /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6D91A92BC6E8FA00A457FB /* OAuth2TokenStorage.swift */; };
 		8D6F892D2B3ADF3D00866619 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F892C2B3ADF3D00866619 /* ImagesListCell.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D47DEE12BCD4AE400B3DD5B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8D6D91A72BC6BE4D00A457FB /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
 		8D6D91A92BC6E8FA00A457FB /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		8D6F892C2B3ADF3D00866619 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
@@ -57,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D4A199E2BCD493B00C81FC4 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				8D47DEE12BCD4AE400B3DD5B /* SplashViewController.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 		8D6676E52B6A5931002C0C75 /* SingleImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,7 @@
 		8DCBDC222B24C09A001620E7 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				8D4A199E2BCD493B00C81FC4 /* Splash */,
 				8D8E62742BC469B60013FEA9 /* Helpers */,
 				8D8E62712BC415E40013FEA9 /* Services */,
 				8D6F89272B3ADE2A00866619 /* ImagesList */,
@@ -221,6 +232,7 @@
 				8D6D91A82BC6BE4D00A457FB /* OAuthTokenResponseBody.swift in Sources */,
 				8D6F892D2B3ADF3D00866619 /* ImagesListCell.swift in Sources */,
 				8D9351D62B63ECAA00B61E2B /* ProfileViewController.swift in Sources */,
+				8D47DEE22BCD4AE400B3DD5B /* SplashViewController.swift in Sources */,
 				8DCBDC242B24C09A001620E7 /* AppDelegate.swift in Sources */,
 				8D7217C92B8B2FDF0023EB63 /* Constants.swift in Sources */,
 				8DE85A382B6A660800A2B146 /* SingleImageViewController.swift in Sources */,
