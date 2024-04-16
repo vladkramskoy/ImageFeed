@@ -36,7 +36,6 @@ final class OAuth2Service {
         let task = URLSession.shared.data(for: request) { result in
             switch result {
             case .success(let data):
-                print("SUCCESS. The access token received", data)
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
