@@ -5,7 +5,7 @@ protocol AuthViewControllerDelegate: AnyObject {
 }
 
 final class AuthViewController: UIViewController {
-    private let ShowWebViewIdentifier = "ShowWebView"
+    private let showWebViewIdentifier = "ShowWebView"
     
     weak var delegate: AuthViewControllerDelegate?
     
@@ -14,10 +14,10 @@ final class AuthViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ShowWebViewIdentifier {
+        if segue.identifier == showWebViewIdentifier {
             guard
                 let webViewViewController = segue.destination as? WebViewViewController
-            else { fatalError("Failed to prepare for \(ShowWebViewIdentifier)") }
+            else { fatalError("Failed to prepare for \(showWebViewIdentifier)") }
             webViewViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -39,7 +39,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
         OAuth2Service.shared.fetchOAuthToken(code: code) { result in
             switch result {
             case .success(let token):
-                print("Токен: \(token)")
+                // TODO: process code
                 self.delegate?.didAuthenticate(self)
             case .failure(let error):
                 print(error)

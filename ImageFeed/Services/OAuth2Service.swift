@@ -4,16 +4,16 @@ final class OAuth2Service {
     static let shared = OAuth2Service()
     private init() {}
     
-    func makeOAuthTokenRequest(code: String) -> URLRequest? {
+    private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard let baseURL = URL(string: "https://unsplash.com") else {
             print("Invalid base URL")
             return nil
         }
         guard let url = URL(
             string: "/oauth/token"
-            + "?client_id=\(AccessKey)"
-            + "&&client_secret=\(SecretKey)"
-            + "&&redirect_uri=\(RedirectURI)"
+            + "?client_id=\(Constants.accessKey)"
+            + "&&client_secret=\(Constants.secretKey)"
+            + "&&redirect_uri=\(Constants.redirectURI)"
             + "&&code=\(code)"
             + "&&grant_type=authorization_code",
             relativeTo: baseURL
@@ -40,10 +40,9 @@ final class OAuth2Service {
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-
-                    let oauth2TokenStorage = OAuth2TokenStorage()
-                    oauth2TokenStorage.token = response.accessToken
-                    if let token = oauth2TokenStorage.token {
+                    
+                    OAuth2TokenStorage.shared.token = response.accessToken
+                    if let token = OAuth2TokenStorage.shared.token {
                         completion(.success(token))
                     }
                 } catch {
