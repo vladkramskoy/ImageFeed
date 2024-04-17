@@ -36,23 +36,19 @@ final class AuthViewController: UIViewController {
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         vc.dismiss(animated: true)
+        UIBlockingProgressHUD.show()
         
-        ProgressHUD.show()
-        
-        DispatchQueue.main.async { // ???
-            OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
-                guard let self = self else { return }
-                
-                ProgressHUD.dismiss()
-                
-                switch result {
-                case .success(let token):
-                    // TODO: process code
-                    self.delegate?.didAuthenticate(self)
-                case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
-                    break
-                }
+        OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
+            guard let self = self else { return }
+            UIBlockingProgressHUD.dismiss()
+            
+            switch result {
+            case .success(let token):
+                // TODO: process code
+                self.delegate?.didAuthenticate(self)
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                break
             }
         }
     }
