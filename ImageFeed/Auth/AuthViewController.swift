@@ -39,18 +39,20 @@ extension AuthViewController: WebViewViewControllerDelegate {
         
         ProgressHUD.show()
         
-        OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
-            guard let self = self else { return }
-            
-            ProgressHUD.dismiss()
-            
-            switch result {
-            case .success(let token):
-                // TODO: process code
-                self.delegate?.didAuthenticate(self)
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
-                break
+        DispatchQueue.main.async { // ???
+            OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
+                guard let self = self else { return }
+                
+                ProgressHUD.dismiss()
+                
+                switch result {
+                case .success(let token):
+                    // TODO: process code
+                    self.delegate?.didAuthenticate(self)
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    break
+                }
             }
         }
     }
