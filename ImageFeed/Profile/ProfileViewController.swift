@@ -46,8 +46,27 @@ final class ProfileViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         view.backgroundColor = UIColor(named: "YP Black (iOS)")
         setupUIElements(view)
+        
+        guard let token = OAuth2TokenStorage.shared.token else { return }
+        
+        ProfileService.shared.fetchProfile(token) { [weak self] result in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let profile):
+                    self.nameLabel.text = profile.name
+                    self.loginNameLabel.text = profile.loginName
+                    self.descriptionLabel.text = profile.bio
+                case .failure(let error):
+                    print("Error \(error)")
+                }
+            }
+        }
     }
     
     private func setupUIElements(_ view: UIView) {
