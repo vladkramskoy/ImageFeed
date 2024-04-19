@@ -44,7 +44,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
             
             switch result {
             case .success(let token):
-                // TODO: process code
+                OAuth2TokenStorage.shared.token = token
                 self.delegate?.didAuthenticate(self)
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
@@ -52,6 +52,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
             }
         }
     }
+    
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
     }

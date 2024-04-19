@@ -50,23 +50,8 @@ final class ProfileViewController: UIViewController {
         
         view.backgroundColor = UIColor(named: "YP Black (iOS)")
         setupUIElements(view)
-        
-        guard let token = OAuth2TokenStorage.shared.token else { return }
-        
-        ProfileService.shared.fetchProfile(token) { [weak self] result in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let profile):
-                    self.nameLabel.text = profile.name
-                    self.loginNameLabel.text = profile.loginName
-                    self.descriptionLabel.text = profile.bio
-                case .failure(let error):
-                    print("Error \(error)")
-                }
-            }
-        }
+        guard let profile = ProfileService.shared.profile else { return }
+        updateProfileDetails(profile: profile)
     }
     
     private func setupUIElements(_ view: UIView) {
@@ -96,5 +81,13 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  16).isActive = true
+    }
+    
+    private func updateProfileDetails(profile: Profile) {
+        DispatchQueue.main.async {
+            self.nameLabel.text = profile.name
+            self.loginNameLabel.text = profile.loginName
+            self.descriptionLabel.text = profile.bio
+        }
     }
 }

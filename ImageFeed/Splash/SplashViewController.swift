@@ -5,22 +5,25 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if OAuth2TokenStorage.shared.token != nil {
-            switchToTabBarController()
+            guard let token = OAuth2TokenStorage.shared.token else { return }
+            fetchProfile(token)
         } else {
             performSegue(withIdentifier: "showAuthenticationScreen", sender: nil)
         }
     }
     
     private func switchToTabBarController() {
-        guard let window = UIApplication.shared.windows.first else {
-            assertionFailure("Invalid window configuration")
-            return
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.windows.first else {
+                assertionFailure("Invalid window configuration")
+                return
+            }
+            
+            let tabBarController = UIStoryboard(name: "Main", bundle: .main)
+                .instantiateViewController(withIdentifier: "TabBarViewController")
+            
+            window.rootViewController = tabBarController
         }
-        
-        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
-            .instantiateViewController(withIdentifier: "TabBarViewController")
-        
-        window.rootViewController = tabBarController
     }
 }
 
@@ -46,6 +49,26 @@ extension SplashViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        switchToTabBarController()
+        
+        guard let token = OAuth2TokenStorage.shared.token else { return }
+        
+        fetchProfile(token)
+    }
+    
+    private func fetchProfile(_ token: String) {
+        UIBlockingProgressHUD.show()
+        ProfileService.shared.fetchProfile(token) { [weak self] result in
+            guard let self = self else { return }
+            UIBlockingProgressHUD.dismiss()
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self.switchToTabBarController()
+                case .failure(let error):
+                    print("Error \(error)")
+                }
+            }
+        }
     }
 }

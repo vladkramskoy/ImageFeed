@@ -70,10 +70,8 @@ final class OAuth2Service {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
                     
-                    OAuth2TokenStorage.shared.token = response.accessToken
-                    if let token = OAuth2TokenStorage.shared.token {
-                        completion(.success(token))
-                    }
+                    let token = response.accessToken
+                    completion(.success(token))
                 } catch {
                     print("Error: \(error.localizedDescription)")
                 }

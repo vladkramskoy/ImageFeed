@@ -8,6 +8,7 @@ final class ProfileService {
     static let shared = ProfileService()
     
     private var task: URLSessionDataTask?
+    private(set) var profile: Profile?
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         if task != nil {
@@ -43,9 +44,10 @@ final class ProfileService {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let personResult = try decoder.decode(ProfileResult.self, from: data)
-                let person = Profile(username: personResult.username, name: personResult.firstName + " " + (personResult.lastName ?? ""), loginName: "@\(personResult.username)", bio: personResult.bio)
-                completion(.success(person))
+                let profileResult = try decoder.decode(ProfileResult.self, from: data)
+                let profile = Profile(username: profileResult.username, name: profileResult.firstName + " " + (profileResult.lastName ?? ""), loginName: "@\(profileResult.username)", bio: profileResult.bio)
+                self?.profile = profile
+                completion(.success(profile))
                 self?.task = nil
             } catch {
                 print(error.localizedDescription)
