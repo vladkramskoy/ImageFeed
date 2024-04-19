@@ -52,6 +52,7 @@ final class ProfileViewController: UIViewController {
         setupUIElements(view)
         guard let profile = ProfileService.shared.profile else { return }
         updateProfileDetails(profile: profile)
+        
     }
     
     private func setupUIElements(_ view: UIView) {

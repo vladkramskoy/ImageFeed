@@ -1,56 +1,56 @@
 import Foundation
 
-enum ProfileServiceError: Error {
+enum ProfileImageServiceError: Error {
     case invalidRequest
 }
 
-final class ProfileService {
-    static let shared = ProfileService()
+final class ProfileImageService {
+    static let shared = ProfileImageService()
     
     private var task: URLSessionDataTask?
-    private(set) var profile: Profile?
+    private (set) var avatarURL: String?
     
     private init() {}
     
-    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
+    func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         if task != nil {
             task?.cancel()
         }
         
-        let path = "/me"
+        let path = "/users/\(username)"
         guard let url = URL(string: path, relativeTo: Constants.defaultBaseURL) else {
             assertionFailure("Failed to create URL")
-            completion(.failure(ProfileServiceError.invalidRequest))
+            completion(.failure(ProfileImageServiceError.invalidRequest))
             return
         }
         
         var request = URLRequest(url: url)
+        guard let token = OAuth2TokenStorage.shared.token else { return }
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let session = URLSession.shared
         
-        let task = session.dataTask(with: request) { [weak self] (data, response, error) in
+        let task = session.dataTask(with: request) { [weak self] (data, responce, error) in
             guard let self = self else { return }
             
             if let error = error {
                 print("Error: \(error)")
-                completion(.failure(ProfileServiceError.invalidRequest))
+                completion(.failure(ProfileImageServiceError.invalidRequest))
                 return
             }
             
             guard let data = data else {
                 print("No data received")
-                completion(.failure(ProfileServiceError.invalidRequest))
+                completion(.failure(ProfileImageServiceError.invalidRequest))
                 return
             }
             
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let profileResult = try decoder.decode(ProfileResult.self, from: data)
-                let profile = Profile(username: profileResult.username, name: profileResult.firstName + " " + (profileResult.lastName ?? ""), loginName: "@\(profileResult.username)", bio: profileResult.bio)
-                self.profile = profile
-                completion(.success(profile))
+                let profileImageResult = try decoder.decode(UserResult.self, from: data)
+                self.avatarURL = profileImageResult.profileImage.small
+                completion(.success(profileImageResult.profileImage.small))
                 self.task = nil
             } catch {
                 print(error.localizedDescription)
@@ -62,16 +62,10 @@ final class ProfileService {
     }
 }
 
-struct ProfileResult: Codable {
-    let username: String
-    let firstName: String
-    let lastName: String?
-    let bio: String?
-}
-
-struct Profile {
-    let username: String
-    let name: String
-    let loginName: String
-    let bio: String?
+struct UserResult: Codable {
+    let profileImage: ProfileImage
+    
+    struct ProfileImage: Codable {
+        let small: String
+    }
 }
