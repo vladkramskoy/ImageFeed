@@ -1,6 +1,8 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
     private lazy var avatarImageView = {
         let photoImage = UIImage(named: "avatar")
         let avatarImageView = UIImageView()
@@ -53,6 +55,10 @@ final class ProfileViewController: UIViewController {
         guard let profile = ProfileService.shared.profile else { return }
         updateProfileDetails(profile: profile)
         
+        profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            updateAvatar()
+        }
     }
     
     private func setupUIElements(_ view: UIView) {
@@ -90,5 +96,13 @@ final class ProfileViewController: UIViewController {
             self.loginNameLabel.text = profile.loginName
             self.descriptionLabel.text = profile.bio
         }
+    }
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        // TODO: process code
     }
 }

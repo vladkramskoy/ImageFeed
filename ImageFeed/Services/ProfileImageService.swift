@@ -6,6 +6,7 @@ enum ProfileImageServiceError: Error {
 
 final class ProfileImageService {
     static let shared = ProfileImageService()
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
     private var task: URLSessionDataTask?
     private (set) var avatarURL: String?
@@ -50,7 +51,12 @@ final class ProfileImageService {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let profileImageResult = try decoder.decode(UserResult.self, from: data)
                 self.avatarURL = profileImageResult.profileImage.small
-                completion(.success(profileImageResult.profileImage.small))
+                guard let profileImageURL = self.avatarURL else { return }
+                completion(.success(profileImageURL))
+                
+                NotificationCenter.default
+                    .post(name: ProfileImageService.didChangeNotification, object: self, userInfo: ["URL": profileImageURL])
+                
                 self.task = nil
             } catch {
                 print(error.localizedDescription)
