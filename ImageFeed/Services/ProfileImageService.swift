@@ -20,7 +20,7 @@ final class ProfileImageService {
         
         let path = "/users/\(username)"
         guard let url = URL(string: path, relativeTo: Constants.defaultBaseURL) else {
-            assertionFailure("Failed to create URL")
+            assertionFailure("Error ProfileImageService [URL]: Failed to create URL")
             completion(.failure(ProfileImageServiceError.invalidRequest))
             return
         }
@@ -45,7 +45,7 @@ final class ProfileImageService {
                 completion(.success(profileImageURL))
                 self.task = nil
             case .failure(let error):
-                print(error.localizedDescription)
+                print("Error ProfileImageService [URL]: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

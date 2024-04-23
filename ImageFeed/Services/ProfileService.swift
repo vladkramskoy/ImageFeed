@@ -19,7 +19,7 @@ final class ProfileService {
         
         let path = "/me"
         guard let url = URL(string: path, relativeTo: Constants.defaultBaseURL) else {
-            assertionFailure("Failed to create URL")
+            assertionFailure("Error ProfileService [URL]: Failed to create URL")
             completion(.failure(ProfileServiceError.invalidRequest))
             return
         }
@@ -39,7 +39,7 @@ final class ProfileService {
                 completion(.success(profile))
                 self.task = nil
             case .failure(let error):
-                print(error.localizedDescription)
+                print("Error ProfileService [objectTask]: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

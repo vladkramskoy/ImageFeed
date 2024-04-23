@@ -14,11 +14,11 @@ extension URLSession {
                     let decodedData = try decoder.decode(T.self, from: data)
                     completion(.success(decodedData))
                 } catch {
-                    print("Error: \(error.localizedDescription)")
+                    print("Ошибка декодирования: \(error.localizedDescription), Данные: \(String(data: data, encoding: .utf8) ?? "")")
                     completion(.failure(error))
                 }
             case .failure(let error):
-                print("Error: \(error.localizedDescription)")
+                print("Error URLSession [data]: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

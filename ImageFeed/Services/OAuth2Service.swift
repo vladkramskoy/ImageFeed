@@ -16,7 +16,7 @@ final class OAuth2Service {
     
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard let baseURL = URL(string: "https://unsplash.com") else {
-            print("Invalid base URL")
+            print("Error OAuth2Service [URL]: Invalid base URL")
             return nil
         }
         guard let url = URL(
@@ -28,7 +28,7 @@ final class OAuth2Service {
             + "&&grant_type=authorization_code",
             relativeTo: baseURL
         ) else {
-            assertionFailure("Failed to create URL")
+            assertionFailure("Error OAuth2Service [URL]: Failed to create URL")
             return nil
         }
         
@@ -44,11 +44,13 @@ final class OAuth2Service {
             if lastCode != code {
                 task?.cancel()
             } else {
+                print("Error OAuth2Service [fetchOAuthToken]: An incomplete session was found")
                 completion(.failure(AuthServiceError.invalidRequest))
                 return
             }
         } else {
             if lastCode == code {
+                print("Error OAuth2Service [fetchOAuthToken]: An incomplete session was found")
                 completion(.failure(AuthServiceError.invalidRequest))
                 return
             }
@@ -57,6 +59,7 @@ final class OAuth2Service {
         lastCode = code
         
         guard let request = makeOAuthTokenRequest(code: code) else {
+            print("Error OAuth2Service [makeOAuthTokenRequest]: Failed to create request")
             completion(.failure(AuthServiceError.invalidRequest))
             return
         }
@@ -69,7 +72,7 @@ final class OAuth2Service {
                     let token = decodedData.accessToken
                     completion(.success(token))
             case .failure(let error):
-                print("FAIL. The access token was not received", error.localizedDescription)
+                print("Error OAuth2Service [objectTask]: The access token was not received. \(error.localizedDescription)")
                 completion(.failure(error))
             }
             self.task = nil
