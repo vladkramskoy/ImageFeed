@@ -7,7 +7,7 @@ enum ProfileServiceError: Error {
 final class ProfileService {
     static let shared = ProfileService()
     
-    private var task: URLSessionDataTask?
+    private var task: URLSessionTask?
     private(set) var profile: Profile?
     
     private init() {}
@@ -29,30 +29,16 @@ final class ProfileService {
         
         let session = URLSession.shared
         
-        let task = session.dataTask(with: request) { [weak self] (data, response, error) in
+        let task = session.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
             guard let self = self else { return }
-            
-            if let error = error {
-                print("Error: \(error)")
-                completion(.failure(ProfileServiceError.invalidRequest))
-                return
-            }
-            
-            guard let data = data else {
-                print("No data received")
-                completion(.failure(ProfileServiceError.invalidRequest))
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let profileResult = try decoder.decode(ProfileResult.self, from: data)
-                let profile = Profile(username: profileResult.username, name: profileResult.firstName + " " + (profileResult.lastName ?? ""), loginName: "@\(profileResult.username)", bio: profileResult.bio)
+
+            switch result {
+            case .success(let decodedData):
+                let profile = Profile(username: decodedData.username, name: decodedData.firstName + " " + (decodedData.lastName ?? ""), loginName: "@\(decodedData.username)", bio: decodedData.bio)
                 self.profile = profile
                 completion(.success(profile))
                 self.task = nil
-            } catch {
+            case .failure(let error):
                 print(error.localizedDescription)
                 completion(.failure(error))
             }

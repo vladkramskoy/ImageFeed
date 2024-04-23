@@ -8,7 +8,7 @@ final class ProfileImageService {
     static let shared = ProfileImageService()
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
-    private var task: URLSessionDataTask?
+    private var task: URLSessionTask?
     private (set) var avatarURL: String?
     
     private init() {}
@@ -31,35 +31,20 @@ final class ProfileImageService {
         
         let session = URLSession.shared
         
-        let task = session.dataTask(with: request) { [weak self] (data, responce, error) in
+        let task = session.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
             guard let self = self else { return }
             
-            if let error = error {
-                print("Error: \(error)")
-                completion(.failure(ProfileImageServiceError.invalidRequest))
-                return
-            }
-            
-            guard let data = data else {
-                print("No data received")
-                completion(.failure(ProfileImageServiceError.invalidRequest))
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let profileImageResult = try decoder.decode(UserResult.self, from: data)
-                self.avatarURL = profileImageResult.profileImage.small
-                guard let profileImageURL = self.avatarURL else { return }
-                print(profileImageURL) // DEL
-                completion(.success(profileImageURL))
+            switch result {
+            case .success(let decodedData):
+                self.avatarURL = decodedData.profileImage.small
                 
                 NotificationCenter.default
-                    .post(name: ProfileImageService.didChangeNotification, object: self, userInfo: ["URL": profileImageURL])
+                    .post(name: ProfileImageService.didChangeNotification, object: self, userInfo: ["URL": decodedData])
                 
+                guard let profileImageURL = self.avatarURL else { return }
+                completion(.success(profileImageURL))
                 self.task = nil
-            } catch {
+            case .failure(let error):
                 print(error.localizedDescription)
                 completion(.failure(error))
             }

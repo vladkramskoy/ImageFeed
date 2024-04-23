@@ -63,9 +63,9 @@ extension SplashViewController: AuthViewControllerDelegate {
             
             switch result {
             case .success(_):
-                guard let profile = ProfileService.shared.profile?.username else { return }
+                guard let username = ProfileService.shared.profile?.username else { return }
                 
-                ProfileImageService.shared.fetchProfileImageURL(username: profile) { result in
+                ProfileImageService.shared.fetchProfileImageURL(username: username) { result in
                     UIBlockingProgressHUD.dismiss()
                     
                     switch result {
