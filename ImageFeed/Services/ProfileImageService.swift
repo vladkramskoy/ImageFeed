@@ -52,6 +52,7 @@ final class ProfileImageService {
                 let profileImageResult = try decoder.decode(UserResult.self, from: data)
                 self.avatarURL = profileImageResult.profileImage.small
                 guard let profileImageURL = self.avatarURL else { return }
+                print(profileImageURL) // DEL
                 completion(.success(profileImageURL))
                 
                 NotificationCenter.default

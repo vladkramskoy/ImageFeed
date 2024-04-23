@@ -61,22 +61,15 @@ final class OAuth2Service {
             return
         }
         
-        let task = urlSession.data(for: request) { [weak self] result in
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
             guard let self = self else { return }
             
             switch result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                    
-                    let token = response.accessToken
+            case .success(let decodedData):
+                    let token = decodedData.accessToken
                     completion(.success(token))
-                } catch {
-                    print("Error: \(error.localizedDescription)")
-                }
             case .failure(let error):
-                print("FAIL. The access token was not received", error)
+                print("FAIL. The access token was not received", error.localizedDescription)
                 completion(.failure(error))
             }
             self.task = nil

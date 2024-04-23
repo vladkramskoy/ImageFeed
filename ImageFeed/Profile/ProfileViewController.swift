@@ -104,5 +104,6 @@ final class ProfileViewController: UIViewController {
             let url = URL(string: profileImageURL)
         else { return }
         // TODO: process code
+        print(url)
     }
 }
