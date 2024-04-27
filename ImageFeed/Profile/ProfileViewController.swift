@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     private var profileImageServiceObserver: NSObjectProtocol?
@@ -49,7 +50,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = UIColor(named: "YP Black (iOS)")
         setupUIElements(view)
         guard let profile = ProfileService.shared.profile else { return }
@@ -57,7 +58,7 @@ final class ProfileViewController: UIViewController {
         
         profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
-            updateAvatar()
+            self.updateAvatar()
         }
     }
     
@@ -104,6 +105,8 @@ final class ProfileViewController: UIViewController {
             let url = URL(string: profileImageURL)
         else { return }
         // TODO: process code
-        print(url)
+        // ***
+        avatarImageView.kf.setImage(with: url)
+        // ***
     }
 }

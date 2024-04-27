@@ -37,12 +37,17 @@ final class ProfileImageService {
             switch result {
             case .success(let decodedData):
                 self.avatarURL = decodedData.profileImage.small
+                guard let profileImageURL = self.avatarURL else { return }
+                completion(.success(profileImageURL))
                 
+                // TODO: process code
+                // ***
+                let profileImageViewController = ProfileViewController()
+                profileImageViewController.viewDidLoad()
+                // ***
                 NotificationCenter.default
                     .post(name: ProfileImageService.didChangeNotification, object: self, userInfo: ["URL": decodedData])
                 
-                guard let profileImageURL = self.avatarURL else { return }
-                completion(.success(profileImageURL))
                 self.task = nil
             case .failure(let error):
                 print("Error ProfileImageService [URL]: \(error.localizedDescription)")
