@@ -1,4 +1,5 @@
 import Foundation
+import SwiftKeychainWrapper
 
 enum ProfileImageServiceError: Error {
     case invalidRequest
@@ -26,7 +27,10 @@ final class ProfileImageService {
         }
         
         var request = URLRequest(url: url)
-        guard let token = OAuth2TokenStorage.shared.token else { return }
+        guard let token: String = KeychainWrapper.standard.string(forKey: "Auth token") else {
+            print("Error ProfileImageService [KeychainWrapper.standard.string]: Failed to get value from Keychain")
+            return
+        }
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let session = URLSession.shared

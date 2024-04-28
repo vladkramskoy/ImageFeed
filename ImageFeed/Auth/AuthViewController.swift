@@ -1,5 +1,6 @@
 import UIKit
 import ProgressHUD
+import SwiftKeychainWrapper
 
 protocol AuthViewControllerDelegate: AnyObject {
     func didAuthenticate(_ vc: AuthViewController)
@@ -44,7 +45,11 @@ extension AuthViewController: WebViewViewControllerDelegate {
             
             switch result {
             case .success(let token):
-                OAuth2TokenStorage.shared.token = token
+                let isSuccess = KeychainWrapper.standard.set(token, forKey: "Auth token")
+                guard isSuccess else {
+                    print("Error AuthViewController [KeychainWrapper.standard.set]: Failed to write value to Keychain")
+                    return
+                }
                 self.delegate?.didAuthenticate(self)
             case .failure(let error):
                 print("Error AuthViewController [fetchOAuthToken]: \(error.localizedDescription)")

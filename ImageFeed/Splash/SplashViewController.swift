@@ -1,11 +1,15 @@
 import UIKit
+import SwiftKeychainWrapper
 
 final class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if OAuth2TokenStorage.shared.token != nil {
-            guard let token = OAuth2TokenStorage.shared.token else { return }
+        if KeychainWrapper.standard.string(forKey: "Auth token") != nil {
+            guard let token = KeychainWrapper.standard.string(forKey: "Auth token") else {
+                print("Error SplashViewController [KeychainWrapper.standard.string]: Failed to get value from Keychain")
+                return
+            }
             fetchProfile(token)
         } else {
             performSegue(withIdentifier: "showAuthenticationScreen", sender: nil)
@@ -50,7 +54,10 @@ extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
         
-        guard let token = OAuth2TokenStorage.shared.token else { return }
+        guard let token: String = KeychainWrapper.standard.string(forKey: "Auth token") else {
+            print("Error SplashViewController [KeychainWrapper.standard.string]: Failed to get value from Keychain")
+            return
+        }
         
         fetchProfile(token)
     }
