@@ -40,11 +40,6 @@ final class ProfileImageService {
                 guard let profileImageURL = self.avatarURL else { return }
                 completion(.success(profileImageURL))
                 
-                // TODO: process code
-                // ***
-                let profileImageViewController = ProfileViewController()
-                profileImageViewController.viewDidLoad()
-                // ***
                 NotificationCenter.default
                     .post(name: ProfileImageService.didChangeNotification, object: self, userInfo: ["URL": decodedData])
                 

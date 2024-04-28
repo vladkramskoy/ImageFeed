@@ -60,6 +60,7 @@ final class ProfileViewController: UIViewController {
             guard let self = self else { return }
             self.updateAvatar()
         }
+//        updateAvatar()
     }
     
     private func setupUIElements(_ view: UIView) {
@@ -104,9 +105,7 @@ final class ProfileViewController: UIViewController {
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL)
         else { return }
-        // TODO: process code
-        // ***
+        
         avatarImageView.kf.setImage(with: url)
-        // ***
     }
 }

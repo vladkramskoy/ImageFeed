@@ -64,13 +64,12 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(_):
                 guard let username = ProfileService.shared.profile?.username else { return }
+                self.switchToTabBarController()
+                UIBlockingProgressHUD.dismiss()
                 
                 ProfileImageService.shared.fetchProfileImageURL(username: username) { result in
-                    UIBlockingProgressHUD.dismiss()
-                    
                     switch result {
-                    case .success(_):
-                        self.switchToTabBarController()
+                    case .success(_): break
                     case .failure(let error):
                         print("Error \(error)")
                     }
