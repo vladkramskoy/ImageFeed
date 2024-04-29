@@ -13,7 +13,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ab8-WG-Zql">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="OXe-cF-68W" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="OXe-cF-68W" customClass="TabBarController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SzN-yo-AcB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -23,10 +23,6 @@
                             <color key="backgroundColor" name="YP Black (iOS)"/>
                         </tabBarAppearance>
                     </tabBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="jdU-UT-3oz"/>
-                        <segue destination="XQE-ds-utF" kind="relationship" relationship="viewControllers" id="H6j-It-uDK"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tvx-ft-rqS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -35,7 +31,7 @@
         <!--ImageList-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="ImageList" id="BYZ-38-t0r" customClass="ImagesListViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagesListViewController" title="ImageList" id="BYZ-38-t0r" customClass="ImagesListViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -119,22 +115,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1354.4000000000001" y="-437.4384236453202"/>
-        </scene>
-        <!--Profile-->
-        <scene sceneID="iM6-vr-7IH">
-            <objects>
-                <viewController title="Profile" id="XQE-ds-utF" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Khu-9R-1Nz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Llk-UL-tVG"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="6Vi-dJ-NY6"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qOR-Ua-NuB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1354" y="227"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="ife-as-tfW">
@@ -360,7 +340,6 @@
         <image name="nav_back_button_white" width="24" height="24"/>
         <image name="sharing_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="75" height="49"/>
-        <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Background (iOS)">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
