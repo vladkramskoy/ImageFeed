@@ -2,6 +2,21 @@ import UIKit
 import SwiftKeychainWrapper
 
 final class SplashViewController: UIViewController {
+    private lazy var logoImageView = {
+        let logoImage = UIImage(named: "logo")
+        let logoImageView = UIImageView()
+        logoImageView.image = logoImage
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        return logoImageView
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(named: "YP Black (iOS)")
+        setupUIElements(view)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -12,7 +27,18 @@ final class SplashViewController: UIViewController {
             }
             fetchProfile(token)
         } else {
-            performSegue(withIdentifier: "showAuthenticationScreen", sender: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "NavigationController") as? UINavigationController,
+                  let authViewController = navigationController.viewControllers[0] as? AuthViewController
+            else {
+                assertionFailure("Failed to prepare for \("NavigationController")")
+                return
+            }
+            authViewController.delegate = self
+            navigationController.modalPresentationStyle = .fullScreen
+            authViewController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true)
         }
     }
     
@@ -29,24 +55,11 @@ final class SplashViewController: UIViewController {
             window.rootViewController = tabBarController
         }
     }
-}
-
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showAuthenticationScreen" {
-            
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let authViewController = navigationController.viewControllers[0] as? AuthViewController
-            else {
-                assertionFailure("Failed to prepare for \("showAuthenticationScreen")")
-                return
-            }
-            
-            authViewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
+    
+    private func setupUIElements(_ view: UIView) {
+        view.addSubview(logoImageView)
+        logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 }
 
