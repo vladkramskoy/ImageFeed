@@ -1,5 +1,4 @@
 import UIKit
-import SwiftKeychainWrapper
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

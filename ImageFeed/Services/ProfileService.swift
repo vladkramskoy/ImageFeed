@@ -34,7 +34,7 @@ final class ProfileService {
 
             switch result {
             case .success(let decodedData):
-                let profile = Profile(username: decodedData.username, name: decodedData.firstName + " " + (decodedData.lastName ?? ""), loginName: "@\(decodedData.username)", bio: decodedData.bio)
+                let profile = Profile(username: decodedData.username, firstName: decodedData.firstName, lastName: decodedData.lastName, loginName: "@\(decodedData.username)", bio: decodedData.bio)
                 self.profile = profile
                 completion(.success(profile))
                 self.task = nil
@@ -57,7 +57,10 @@ struct ProfileResult: Codable {
 
 struct Profile {
     let username: String
-    let name: String
+    let firstName: String
+    let lastName: String?
     let loginName: String
     let bio: String?
+    
+    var name: String { firstName + " " + (lastName ?? "") }
 }

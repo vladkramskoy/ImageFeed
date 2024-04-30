@@ -95,6 +95,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                     }
                 }
             case .failure(let error):
+                UIBlockingProgressHUD.dismiss()
                 print("Error \(error)")
             }
         }

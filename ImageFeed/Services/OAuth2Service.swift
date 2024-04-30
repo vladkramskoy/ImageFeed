@@ -41,15 +41,14 @@ final class OAuth2Service {
     func fetchOAuthToken(code: String, completion: @escaping (Swift.Result<String, Error>) -> Void ) {
         assert(Thread.isMainThread)
         if task != nil {
-            if lastCode != code {
-                task?.cancel()
-            } else {
+            guard lastCode != code else {
                 print("Error OAuth2Service [fetchOAuthToken]: An incomplete session was found")
                 completion(.failure(AuthServiceError.invalidRequest))
                 return
             }
+            task?.cancel()
         } else {
-            if lastCode == code {
+            guard lastCode != code else {
                 print("Error OAuth2Service [fetchOAuthToken]: An incomplete session was found")
                 completion(.failure(AuthServiceError.invalidRequest))
                 return
@@ -69,8 +68,8 @@ final class OAuth2Service {
             
             switch result {
             case .success(let decodedData):
-                    let token = decodedData.accessToken
-                    completion(.success(token))
+                let token = decodedData.accessToken
+                completion(.success(token))
             case .failure(let error):
                 print("Error OAuth2Service [objectTask]: The access token was not received. \(error.localizedDescription)")
                 completion(.failure(error))
