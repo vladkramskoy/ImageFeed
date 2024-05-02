@@ -1,4 +1,6 @@
 import UIKit
+import ProgressHUD
+import SwiftKeychainWrapper
 
 protocol AuthViewControllerDelegate: AnyObject {
     func didAuthenticate(_ vc: AuthViewController)
@@ -35,18 +37,37 @@ final class AuthViewController: UIViewController {
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         vc.dismiss(animated: true)
+        UIBlockingProgressHUD.show()
         
-        OAuth2Service.shared.fetchOAuthToken(code: code) { result in
+        OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
+            guard let self = self else { return }
+            UIBlockingProgressHUD.dismiss()
+            
             switch result {
             case .success(let token):
-                // TODO: process code
+                let isSuccess = KeychainWrapper.standard.set(token, forKey: "Auth token")
+                guard isSuccess else {
+                    print("Error AuthViewController [KeychainWrapper.standard.set]: Failed to write value to Keychain")
+                    return
+                }
                 self.delegate?.didAuthenticate(self)
             case .failure(let error):
-                print(error)
+                print("Error AuthViewController [fetchOAuthToken]: \(error.localizedDescription)")
+                showAlert()
             }
         }
     }
+    
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
+    }
+    
+    private func showAlert() {
+        let alertController = UIAlertController(title: "Что-то пошло не так(", message: "Не удалось войти в систему", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ок", style: .default) { _ in
+            alertController.dismiss(animated: true)
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
 }

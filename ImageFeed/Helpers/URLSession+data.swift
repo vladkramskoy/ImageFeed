@@ -19,15 +19,15 @@ extension URLSession {
                 if 200 ..< 300 ~= statusCode {
                     fulfillCompletionOnTheMainThread(.success(data))
                 } else {
+                    print("Error URLSession [dataTask]: \(statusCode)")
                     fulfillCompletionOnTheMainThread(.failure(NetworkError.httpStatusCode(statusCode)))
-                    print("Error: \(statusCode)")
                 }
             } else if let error = error {
+                print("Error URLSession [dataTask]: \(error)")
                 fulfillCompletionOnTheMainThread(.failure(NetworkError.urlRequestError(error)))
-                print("Error: \(error)")
             } else {
+                print("Error URLSession [dataTask]: Url session error")
                 fulfillCompletionOnTheMainThread(.failure(NetworkError.urlSessionError))
-                print("Url session error")
             }
         })
         return task
