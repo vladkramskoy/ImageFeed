@@ -89,3 +89,19 @@ extension ImagesListViewController: UITableViewDelegate {
         return cellHeight
     }
 }
+
+extension ImagesListViewController {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print("\(indexPath.row)") // DEL
+        
+        if indexPath.row == 0 || indexPath.row + 1 == ImageListService.shared.photos.count { // DEL indexPath.row == 0, или как должны загружатся первые 10 фото???
+            ImageListService.shared.fetchPhotosNextPage()
+        }
+        
+        if indexPath.row == 8 || indexPath.row == 18 {
+            print("Элементов в массиве: \(ImageListService.shared.photos.count)") // DEL
+        }
+        
+        // TODO: process code
+    }
+}
