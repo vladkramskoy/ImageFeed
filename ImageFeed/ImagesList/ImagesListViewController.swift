@@ -2,6 +2,7 @@ import UIKit
 
 final class ImagesListViewController: UIViewController {
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
+    private var imageListServiceObserver: NSObjectProtocol?
     
     @IBOutlet private var tableView: UITableView!
     
@@ -21,6 +22,11 @@ final class ImagesListViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        
+        imageListServiceObserver = NotificationCenter.default.addObserver(forName: ImagesListService.didChangeNotification, object: nil, queue: .main) { _ in
+            print("Уведомление получено")
+        }
+        ImagesListService.shared.fetchPhotosNextPage()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -93,13 +99,10 @@ extension ImagesListViewController: UITableViewDelegate {
 extension ImagesListViewController {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         print("\(indexPath.row)") // DEL
+        print("\(ImagesListService.shared.photos.count)") // DEL
         
-        if indexPath.row == 0 || indexPath.row + 1 == ImageListService.shared.photos.count { // DEL indexPath.row == 0, или как должны загружатся первые 10 фото???
-            ImageListService.shared.fetchPhotosNextPage()
-        }
-        
-        if indexPath.row == 8 || indexPath.row == 18 {
-            print("Элементов в массиве: \(ImageListService.shared.photos.count)") // DEL
+        if indexPath.row + 1 == ImagesListService.shared.photos.count {
+            ImagesListService.shared.fetchPhotosNextPage()
         }
         
         // TODO: process code

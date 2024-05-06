@@ -1,8 +1,8 @@
 import Foundation
 import SwiftKeychainWrapper
 
-final class ImageListService {
-    static let shared = ImageListService()
+final class ImagesListService {
+    static let shared = ImagesListService()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
     private (set) var photos: [Photo] = []
@@ -13,6 +13,7 @@ final class ImageListService {
     
     func fetchPhotosNextPage() {
         let nextPage = (lastLoadedPage ?? 0) + 1
+        
         if task != nil {
             task?.cancel()
         }
@@ -39,6 +40,7 @@ final class ImageListService {
             case .success(let responce):
                 DispatchQueue.main.async {
                     self.photos.append(contentsOf: self.convertPhotoResultsToPhoto(results: responce))
+                    NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: nil)
                 }
                 
                 if let currentPage = lastLoadedPage {
@@ -48,8 +50,10 @@ final class ImageListService {
                 }
                 
                 print("Next Page: \(nextPage)") // DEL
-                print(url.absoluteString) // DEL
-                print(self.photos) // DEL
+                print("URL: \(url.absoluteString)") // DEL
+                //                print(self.photos) // DEL
+                
+                self.task = nil
             case .failure(let error):
                 print("Error ImageListService [objectTask]: \(error.localizedDescription)")
             }
