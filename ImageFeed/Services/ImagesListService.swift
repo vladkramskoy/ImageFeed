@@ -49,10 +49,6 @@ final class ImagesListService {
                     self.lastLoadedPage = 1
                 }
                 
-                print("Next Page: \(nextPage)") // DEL
-                print("URL: \(url.absoluteString)") // DEL
-                //                print(self.photos) // DEL
-                
                 self.task = nil
             case .failure(let error):
                 print("Error ImageListService [objectTask]: \(error.localizedDescription)")
@@ -66,6 +62,9 @@ final class ImagesListService {
         let dateFormatter = ISO8601DateFormatter()
         
         return results.map { photoResult in
+            let thumbWidth = 200.0
+            let aspectRatio = Double(photoResult.width) / Double(photoResult.height)
+            let thumbHeight = thumbWidth / aspectRatio
             let size = CGSize(width: photoResult.width, height: photoResult.height)
             let createdDate = photoResult.createdAt != nil ? dateFormatter.date(from: photoResult.createdAt ?? "") : nil
             let photo = Photo(id: photoResult.id,
@@ -74,7 +73,8 @@ final class ImagesListService {
                               welcomeDescription: photoResult.altDescription,
                               thumbImageURL: photoResult.urls.thumb,
                               largeImageURL: photoResult.urls.raw,
-                              isLiked: photoResult.likedByUser)
+                              isLiked: photoResult.likedByUser,
+                              thumbSize: CGSize(width: thumbWidth, height: thumbHeight))
             return photo
         }
     }
@@ -95,7 +95,7 @@ struct UrlResult: Decodable {
     let thumb: String
 }
 
-struct Photo: Decodable { // структура для UI
+struct Photo: Decodable {
     let id: String
     let size: CGSize
     let created: Date?
@@ -103,4 +103,5 @@ struct Photo: Decodable { // структура для UI
     let thumbImageURL: String
     let largeImageURL: String
     let isLiked: Bool
+    let thumbSize: CGSize
 }

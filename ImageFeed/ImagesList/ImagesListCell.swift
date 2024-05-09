@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
@@ -37,6 +38,11 @@ final class ImagesListCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         configGradientView()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cellImage.kf.cancelDownloadTask()
     }
 }
 
