@@ -37,8 +37,10 @@ final class ImagesListViewController: UIViewController {
             let indexPatch = sender as? IndexPath
             guard let viewController = viewController else { return }
             guard let indexPatch = indexPatch else { return }
-            let image = UIImage(named: photosName[indexPatch.row])
-            viewController.image = image
+            
+            if let url = URL(string: photos[indexPatch.row].largeImageURL) {
+                viewController.fullImageURL = url
+            }
         } else {
             super.prepare(for: segue, sender: sender)
         }
