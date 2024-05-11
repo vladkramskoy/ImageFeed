@@ -1,14 +1,21 @@
 import UIKit
 import Kingfisher
 
+protocol ImagesListCellDelegate: AnyObject {
+    func imageListCellDidTapLike(_ cell: ImagesListCell)
+}
+
 final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
+    weak var delegate: ImagesListCellDelegate?
+    
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var cellImage: UIImageView!
+    
     private let gradientView = UIView()
     private let gradientLayer = CAGradientLayer()
-    
+        
     // MARK: - Private Methods
     
     private func configGradientView() {
@@ -43,6 +50,21 @@ final class ImagesListCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         cellImage.kf.cancelDownloadTask()
+    }
+    
+    @IBAction func likeButtonClicked(_ sender: UIButton) {
+        delegate?.imageListCellDidTapLike(self)
+    }
+}
+
+extension ImagesListCell {
+    func setIsLiked(cell: ImagesListCell, photo: Photo) {
+        let isLiked = photo.isLiked
+        let likeImage = isLiked ? UIImage(named: "like_button_off") : UIImage(named: "like_button_on")
+        
+        DispatchQueue.main.async {
+            cell.likeButton.setImage(likeImage, for: .normal)
+        }
     }
 }
 

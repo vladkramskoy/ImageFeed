@@ -59,6 +59,15 @@ final class ImagesListViewController: UIViewController {
             } completion: { _ in }
         }
     }
+    
+    private func showAlert(error: Error) {
+        let alertController = UIAlertController(title: "Что-то пошло не так(", message: "Не удалось поставить лайк. \(error.localizedDescription)", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ок", style: .default) { _ in
+            alertController.dismiss(animated: true)
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
 }
 
 // MARK: - Extensions
@@ -78,10 +87,13 @@ extension ImagesListViewController {
         if let date = photos[indexPath.row].created {
             cell.dateLabel.text = dateFormatter.string(from: date)
         }
+        cell.delegate = self
         
-        let isLaked = indexPath.row % 2 == 0
+        let isLaked = photos[indexPath.row].isLiked
         let likeImage = isLaked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
-        cell.likeButton.setImage(likeImage, for: .normal)
+        DispatchQueue.main.async {
+            cell.likeButton.setImage(likeImage, for: .normal)
+        }
     }
 }
 
@@ -109,9 +121,6 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        guard let image = UIImage(named: photosName[indexPath.row]) else {
-//            return 0
-//        }
         let thumbImageSize = photos[indexPath.row].thumbSize
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
@@ -128,6 +137,27 @@ extension ImagesListViewController {
         
         if indexPath.row + 1 == ImagesListService.shared.photos.count {
             ImagesListService.shared.fetchPhotosNextPage()
+        }
+    }
+}
+
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        
+        UIBlockingProgressHUD.show()
+        ImagesListService.shared.changeLike(photoID: photo.id, isLike: photo.isLiked) { result in
+            switch result {
+            case .success():
+                self.photos = ImagesListService.shared.photos
+                UIBlockingProgressHUD.dismiss()
+                cell.setIsLiked(cell: cell, photo: photo)
+            case .failure(let error):
+                UIBlockingProgressHUD.dismiss()
+                print("Error ImageListViewController [changeLike]: \(error.localizedDescription)")
+                self.showAlert(error: error)
+            }
         }
     }
 }

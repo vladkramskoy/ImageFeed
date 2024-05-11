@@ -78,6 +78,57 @@ final class ImagesListService {
             return photo
         }
     }
+    
+    func changeLike(photoID: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        let method = isLike ? "DELETE" : "POST"
+        
+        if task != nil {
+            task?.cancel()
+        }
+        
+        let path = "/photos/\(photoID)/like"
+        guard let url = URL(string: path, relativeTo: Constants.defaultBaseURL) else {
+            assertionFailure("Error ImageListService [URL]: Failed to create URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        guard let token: String = KeychainWrapper.standard.string(forKey: "Auth token") else {
+            print("Error ProfileImageService [KeychainWrapper.standard.string]: Failed to get value from Keychain")
+            return
+        }
+        request.httpMethod = method
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) { [weak self] data, responce, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Error ImagesListService [dataTask]: \(error)")
+                completion(.failure(error))
+            }
+            
+            if let index = self.photos.firstIndex(where: { $0.id == photoID }) {
+                let photo = photos[index]
+                
+                let newPhoto = Photo(id: photo.id,
+                                     size: photo.size,
+                                     created: photo.created,
+                                     welcomeDescription: photo.welcomeDescription,
+                                     thumbImageURL: photo.thumbImageURL,
+                                     largeImageURL: photo.largeImageURL,
+                                     isLiked: !photo.isLiked,
+                                     thumbSize: photo.thumbSize)
+                self.photos[index] = newPhoto
+            }
+            completion(.success(()))
+            self.task = nil
+        }
+        self.task = task
+        task.resume()
+    }
 }
 
 struct PhotoResult: Decodable {
