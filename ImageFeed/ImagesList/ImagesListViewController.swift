@@ -10,8 +10,8 @@ final class ImagesListViewController: UIViewController {
     
     lazy private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.dateFormat = "d MMMM yyyy"
         
         return formatter
     }()
@@ -137,7 +137,6 @@ extension ImagesListViewController: UITableViewDelegate {
 
 extension ImagesListViewController {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)") // DEL
         
         if indexPath.row + 1 == ImagesListService.shared.photos.count {
             ImagesListService.shared.fetchPhotosNextPage()
