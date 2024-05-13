@@ -16,6 +16,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var logoutButton: UIButton = {
         let logoutButton = UIButton.systemButton(with: UIImage(named: "logout_button") ?? UIImage(), target: ProfileViewController.self, action: nil)
+        logoutButton.addTarget(self, action: #selector(tapLogoutButton(_:)), for: .touchUpInside)
         logoutButton.tintColor = UIColor(named: "YP Red (iOS)")
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         return logoutButton
@@ -107,5 +108,9 @@ final class ProfileViewController: UIViewController {
         else { return }
         
         avatarImageView.kf.setImage(with: url)
+    }
+    
+    @objc private func tapLogoutButton(_ sender: UIButton) {
+        ProfileLogoutService.shared.logout()
     }
 }

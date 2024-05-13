@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D4644422BF0281400476708 /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4644412BF0281400476708 /* ProfileLogoutService.swift */; };
 		8D47DEE22BCD4AE400B3DD5B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47DEE12BCD4AE400B3DD5B /* SplashViewController.swift */; };
 		8D5069912BD2C69A0024D9A9 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5069902BD2C69A0024D9A9 /* ProfileImageService.swift */; };
 		8D5CE0262BD6C046001FB788 /* URLSession+objectTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5CE0252BD6C046001FB788 /* URLSession+objectTask.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D4644412BF0281400476708 /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
 		8D47DEE12BCD4AE400B3DD5B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8D5069902BD2C69A0024D9A9 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		8D5CE0252BD6C046001FB788 /* URLSession+objectTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+objectTask.swift"; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				8D7BEE0D2BD16ACC00F58F98 /* ProfileService.swift */,
 				8D5069902BD2C69A0024D9A9 /* ProfileImageService.swift */,
 				8D6828A92BE3AED600F34B51 /* ImagesListService.swift */,
+				8D4644412BF0281400476708 /* ProfileLogoutService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				8D7217C92B8B2FDF0023EB63 /* Constants.swift in Sources */,
 				8D5CE0262BD6C046001FB788 /* URLSession+objectTask.swift in Sources */,
 				8DC5DD122BD0785F008552BA /* UIBlockingProgressHUD.swift in Sources */,
+				8D4644422BF0281400476708 /* ProfileLogoutService.swift in Sources */,
 				8DE85A382B6A660800A2B146 /* SingleImageViewController.swift in Sources */,
 				8D6828AA2BE3AED600F34B51 /* ImagesListService.swift in Sources */,
 				8D8E62762BC469E10013FEA9 /* URLSession+data.swift in Sources */,

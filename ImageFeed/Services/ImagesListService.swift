@@ -129,6 +129,10 @@ final class ImagesListService {
         self.task = task
         task.resume()
     }
+    
+    func resetPhotos() {
+        self.photos = []
+    }
 }
 
 struct PhotoResult: Decodable {
