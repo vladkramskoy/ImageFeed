@@ -4,6 +4,7 @@ import SwiftKeychainWrapper
 final class ImagesListService {
     static let shared = ImagesListService()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    static let dateFormatter = ISO8601DateFormatter()
     
     private (set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
@@ -43,11 +44,7 @@ final class ImagesListService {
                     NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: nil)
                 }
                 
-                if let currentPage = lastLoadedPage {
-                    self.lastLoadedPage = currentPage + 1
-                } else {
-                    self.lastLoadedPage = 1
-                }
+                lastLoadedPage = (lastLoadedPage ?? 0) + 1
                 
                 self.task = nil
             case .failure(let error):
@@ -59,14 +56,14 @@ final class ImagesListService {
     }
     
     private func convertPhotoResultsToPhoto(results: [PhotoResult]) -> [Photo] {
-        let dateFormatter = ISO8601DateFormatter()
         
         return results.map { photoResult in
             let thumbWidth = 200.0
             let aspectRatio = Double(photoResult.width) / Double(photoResult.height)
             let thumbHeight = thumbWidth / aspectRatio
             let size = CGSize(width: photoResult.width, height: photoResult.height)
-            let createdDate = photoResult.createdAt != nil ? dateFormatter.date(from: photoResult.createdAt ?? "") : nil
+            let createdDate = photoResult.createdAt.flatMap { ImagesListService.dateFormatter.date(from: $0) }
+            
             let photo = Photo(id: photoResult.id,
                               size: size,
                               created: createdDate,
