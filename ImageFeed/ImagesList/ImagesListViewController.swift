@@ -54,12 +54,16 @@ final class ImagesListViewController: UIViewController {
             let newCount = ImagesListService.shared.photos.count
             self.photos = ImagesListService.shared.photos
             if oldCount != newCount {
-                self.tableView.performBatchUpdates {
-                    let indexPaths = (oldCount..<newCount).map { i in
-                        IndexPath(row: i, section: 0)
-                    }
-                    self.tableView.insertRows(at: indexPaths, with: .automatic)
-                } completion: { _ in }
+                if oldCount > newCount {
+                    self.tableView.reloadData()
+                } else {
+                    self.tableView.performBatchUpdates {
+                        let indexPaths = (oldCount..<newCount).map { i in
+                            IndexPath(row: i, section: 0)
+                        }
+                        self.tableView.insertRows(at: indexPaths, with: .automatic)
+                    } completion: { _ in }
+                }
             }
         }
     }
