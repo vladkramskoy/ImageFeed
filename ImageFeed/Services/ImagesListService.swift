@@ -15,8 +15,9 @@ final class ImagesListService {
     func fetchPhotosNextPage() {
         let nextPage = (lastLoadedPage ?? 0) + 1
         
-        if task != nil {
-            task?.cancel()
+        guard task == nil else {
+            debugPrint("Error ImageListService [fetchPhotosNextPage]: Race Condition - reject repeated photos request")
+            return
         }
         
         let path = "/photos?page=\(nextPage)"
