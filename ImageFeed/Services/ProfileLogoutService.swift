@@ -1,4 +1,3 @@
-import Foundation
 import Kingfisher
 import WebKit
 import SwiftKeychainWrapper

@@ -110,7 +110,20 @@ final class ProfileViewController: UIViewController {
         avatarImageView.kf.setImage(with: url)
     }
     
+    private func showAlert() {
+        let alertController = UIAlertController(title: "Пока, пока!", message: "Уверены что хотите выйти?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Да", style: .default) { _ in
+            ProfileLogoutService.shared.logout()
+        }
+        let noAction = UIAlertAction(title: "Нет", style: .default) { _ in
+            alertController.dismiss(animated: true)
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        present(alertController, animated: true)
+    }
+    
     @objc private func tapLogoutButton(_ sender: UIButton) {
-        ProfileLogoutService.shared.logout()
+        self.showAlert()
     }
 }
