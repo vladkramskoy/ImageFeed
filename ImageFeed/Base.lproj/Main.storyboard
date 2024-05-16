@@ -67,6 +67,9 @@
                                                     <rect key="frame" x="315" y="4" width="44" height="44"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="like_button_on"/>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked:" destination="qMK-hd-d0S" eventType="touchUpInside" id="Nep-hf-kpa"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" name="YP Background (iOS)"/>
@@ -223,17 +226,15 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iP3-3e-svF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8k-zv-fvN">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8k-zv-fvN">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="centerX" secondItem="vPT-ne-9zN" secondAttribute="centerX" id="5bh-so-ZLo"/>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="leading" secondItem="QF7-0g-B8n" secondAttribute="leading" id="6hb-cF-sbH"/>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="top" secondItem="QF7-0g-B8n" secondAttribute="top" id="KU0-kI-7G7"/>
-                                    <constraint firstItem="QF7-0g-B8n" firstAttribute="trailing" secondItem="f8k-zv-fvN" secondAttribute="trailing" id="cKu-FC-15u"/>
-                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="centerY" secondItem="vPT-ne-9zN" secondAttribute="centerY" id="i6G-fr-E99"/>
-                                    <constraint firstItem="QF7-0g-B8n" firstAttribute="bottom" secondItem="f8k-zv-fvN" secondAttribute="bottom" id="v57-i9-YKk"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="leading" secondItem="vPT-ne-9zN" secondAttribute="leading" id="NNZ-gz-1qk"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="trailing" secondItem="vPT-ne-9zN" secondAttribute="trailing" constant="375" id="y5L-Wb-WFY"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="top" secondItem="vPT-ne-9zN" secondAttribute="top" id="zcw-D2-p3n"/>
+                                    <constraint firstItem="f8k-zv-fvN" firstAttribute="bottom" secondItem="vPT-ne-9zN" secondAttribute="bottom" constant="812" id="zsd-Ym-T3Y"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="vPT-ne-9zN"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QF7-0g-B8n"/>
@@ -265,10 +266,10 @@
                         <viewLayoutGuide key="safeArea" id="ch2-im-vIx"/>
                         <color key="backgroundColor" name="YP Black (iOS)"/>
                         <constraints>
-                            <constraint firstItem="iP3-3e-svF" firstAttribute="trailing" secondItem="ch2-im-vIx" secondAttribute="trailing" id="6vg-Vm-odZ"/>
+                            <constraint firstItem="iP3-3e-svF" firstAttribute="trailing" secondItem="QBJ-Rw-woQ" secondAttribute="trailing" id="6vg-Vm-odZ"/>
                             <constraint firstItem="iP3-3e-svF" firstAttribute="bottom" secondItem="QBJ-Rw-woQ" secondAttribute="bottom" id="7s6-9b-vgy"/>
                             <constraint firstItem="ch2-im-vIx" firstAttribute="bottom" secondItem="Z0K-iQ-88J" secondAttribute="bottom" constant="36" id="CDd-GI-6g6"/>
-                            <constraint firstItem="iP3-3e-svF" firstAttribute="leading" secondItem="ch2-im-vIx" secondAttribute="leading" id="TP3-OV-i3G"/>
+                            <constraint firstItem="iP3-3e-svF" firstAttribute="leading" secondItem="QBJ-Rw-woQ" secondAttribute="leading" id="TP3-OV-i3G"/>
                             <constraint firstItem="Z0K-iQ-88J" firstAttribute="centerX" secondItem="ch2-im-vIx" secondAttribute="centerX" id="dfR-xT-LXc"/>
                             <constraint firstItem="gq4-7S-8JB" firstAttribute="leading" secondItem="ch2-im-vIx" secondAttribute="leading" constant="8" id="ihS-OR-4as"/>
                             <constraint firstItem="iP3-3e-svF" firstAttribute="top" secondItem="QBJ-Rw-woQ" secondAttribute="top" id="mNx-Gh-MgI"/>
