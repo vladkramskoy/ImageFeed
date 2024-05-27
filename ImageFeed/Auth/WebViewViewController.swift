@@ -9,6 +9,8 @@ protocol WebViewViewControllerDelegate: AnyObject {
 public protocol WebViewViewControllerProtocol: AnyObject {
     var presenter: WebViewPresenterProtocol? { get set }
     func load(request: URLRequest)
+    func setProgressValue(_ newValue: Float)
+    func setProgressHidden(_ isHidden: Bool)
 }
 
 final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
@@ -26,7 +28,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         progressView.progressViewStyle = .bar
         estimatedProgressObservation = webView.observe(\.estimatedProgress, options: [], changeHandler: { [weak self] _, _ in // KVO
             guard let self = self else { return }
-            self.updateProgress()
+            presenter?.didUpdateProgressValue(webView.estimatedProgress)
         })
         
         webView.navigationDelegate = self
@@ -37,9 +39,12 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         webView.load(request)
     }
     
-    private func updateProgress() { // Обновляем данные
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001 // Если разница между этими значениями меньше или равна 0.0001, то условие будет истинным и мы скроем индиктор
+    func setProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
+    }
+    
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
     }
 }
 
