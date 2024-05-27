@@ -6,7 +6,13 @@ protocol WebViewViewControllerDelegate: AnyObject {
     func webViewViewControllerDidCancel(_ vc: WebViewViewController)
 }
 
-final class WebViewViewController: UIViewController {
+public protocol WebViewViewControllerProtocol: AnyObject {
+    var presenter: WebViewPresenterProtocol? { get set }
+    func load(request: URLRequest)
+}
+
+final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
+    var presenter: WebViewPresenterProtocol?
     private var estimatedProgressObservation: NSKeyValueObservation?
     
     @IBOutlet private var webView: WKWebView!
@@ -14,49 +20,26 @@ final class WebViewViewController: UIViewController {
     
     weak var delegate: WebViewViewControllerDelegate?
     
-    enum WebViewConstants {
-        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         progressView.progressViewStyle = .bar
-        
         estimatedProgressObservation = webView.observe(\.estimatedProgress, options: [], changeHandler: { [weak self] _, _ in // KVO
             guard let self = self else { return }
             self.updateProgress()
         })
         
         webView.navigationDelegate = self
-        loadAuthView()
+        presenter?.viewDidLoad()
+    }
+    
+    func load(request: URLRequest) {
+        webView.load(request)
     }
     
     private func updateProgress() { // Обновляем данные
         progressView.progress = Float(webView.estimatedProgress)
         progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001 // Если разница между этими значениями меньше или равна 0.0001, то условие будет истинным и мы скроем индиктор
-    }
-    
-    private func loadAuthView() {
-        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
-            print("Error creating URLComponents")
-            return
-        }
-        
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: Constants.accessScope)
-        ]
-        
-        guard let url = urlComponents.url else {
-            print("URLComponents is equal to nil")
-            return
-        }
-        
-        let request = URLRequest(url: url)
-        webView.load(request)
     }
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D2A23D32C04BF1800F96F3A /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A23D22C04BF1800F96F3A /* WebViewPresenter.swift */; };
 		8D4644422BF0281400476708 /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4644412BF0281400476708 /* ProfileLogoutService.swift */; };
 		8D47DEE22BCD4AE400B3DD5B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47DEE12BCD4AE400B3DD5B /* SplashViewController.swift */; };
 		8D5069912BD2C69A0024D9A9 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5069902BD2C69A0024D9A9 /* ProfileImageService.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D2A23D22C04BF1800F96F3A /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
 		8D4644412BF0281400476708 /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
 		8D47DEE12BCD4AE400B3DD5B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8D5069902BD2C69A0024D9A9 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				8D7B5FFB2B8B720B0069FFF4 /* AuthViewController.swift */,
 				8D7B5FFF2B8B7EF60069FFF4 /* WebViewViewController.swift */,
+				8D2A23D22C04BF1800F96F3A /* WebViewPresenter.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				8D4644422BF0281400476708 /* ProfileLogoutService.swift in Sources */,
 				8DE85A382B6A660800A2B146 /* SingleImageViewController.swift in Sources */,
 				8D6828AA2BE3AED600F34B51 /* ImagesListService.swift in Sources */,
+				8D2A23D32C04BF1800F96F3A /* WebViewPresenter.swift in Sources */,
 				8D8E62762BC469E10013FEA9 /* URLSession+data.swift in Sources */,
 				8D7B5FFC2B8B720B0069FFF4 /* AuthViewController.swift in Sources */,
 				8D7B60002B8B7EF60069FFF4 /* WebViewViewController.swift in Sources */,
