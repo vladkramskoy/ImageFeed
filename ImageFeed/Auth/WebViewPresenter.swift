@@ -10,9 +10,9 @@ public protocol WebViewPresenterProtocol {
 final class WebViewPresenter: WebViewPresenterProtocol {
     weak var view: WebViewViewControllerProtocol?
     
-    enum WebViewConstants {
-        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-    }
+//    enum WebViewConstants {
+//        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
+//    }
     
     func viewDidLoad() {
         loadAuthView()
@@ -43,7 +43,7 @@ final class WebViewPresenter: WebViewPresenterProtocol {
     }
     
     private func loadAuthView() {
-        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
+        guard var urlComponents = URLComponents(string: AuthConfiguration.standart.authURLString) else {
             print("Error creating URLComponents")
             return
         }
