@@ -152,7 +152,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="KBs-p9-c2i" kind="presentation" identifier="ShowWebView" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="7Qa-jM-7QJ"/>
+                                    <segue destination="KBs-p9-c2i" kind="presentation" identifier="ShowWebView" modalPresentationStyle="fullScreen" id="7Qa-jM-7QJ"/>
                                 </connections>
                             </button>
                         </subviews>
