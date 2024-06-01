@@ -16,14 +16,35 @@ final class WebViewTests: XCTestCase {
         // Then
         XCTAssertTrue(presenter.viewDidLoadCalled)
     }
+    
+    func testPresenterCallsLoadRequest() {
+        // Given
+        let viewController = WebViewViewControllerSpy()
+        let presenter = WebViewPresenterSpy()
+        viewController.presenter = presenter
+        presenter.view = viewController
+        
+        // When
+        viewController.presenter?.viewDidLoad()
+        
+        // Then
+        XCTAssertTrue(viewController.loadRequest)
+    }
 }
 
 final class WebViewPresenterSpy: WebViewPresenterProtocol {
     var viewDidLoadCalled: Bool = false
     var view: WebViewViewControllerProtocol?
+    var request: URLRequest? = nil
+    
+
     
     func viewDidLoad() {
         viewDidLoadCalled = true
+        
+        let url = URL(string: "https://example.com")
+        request = URLRequest(url: url!)
+        view?.load(request: request!)
     }
     
     func didUpdateProgressValue(_ newValue: Double) {
@@ -35,4 +56,19 @@ final class WebViewPresenterSpy: WebViewPresenterProtocol {
     }
 }
 
-
+final class WebViewViewControllerSpy: WebViewViewControllerProtocol {
+    var loadRequest: Bool = false
+    var presenter: WebViewPresenterProtocol?
+    
+    func load(request: URLRequest) {
+        loadRequest = true
+    }
+    
+    func setProgressValue(_ newValue: Float) {
+        
+    }
+    
+    func setProgressHidden(_ isHidden: Bool) {
+        
+    }
+}
