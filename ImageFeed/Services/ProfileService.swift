@@ -59,7 +59,7 @@ struct ProfileResult: Codable {
     let bio: String?
 }
 
-struct Profile {
+public struct Profile {
     let username: String
     let firstName: String
     let lastName: String?

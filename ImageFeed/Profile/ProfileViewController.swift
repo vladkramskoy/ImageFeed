@@ -1,7 +1,12 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+public protocol ProfileViewControllerProtocol: AnyObject {
+    func updateAvatar()
+    func updateProfileDetails(profile: Profile)
+}
+
+final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     private var profileImageServiceObserver: NSObjectProtocol?
     
     private lazy var avatarImageView = {
@@ -93,7 +98,7 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  16).isActive = true
     }
     
-    private func updateProfileDetails(profile: Profile) {
+    func updateProfileDetails(profile: Profile) {
         DispatchQueue.main.async {
             self.nameLabel.text = profile.name
             self.loginNameLabel.text = profile.loginName
@@ -101,7 +106,7 @@ final class ProfileViewController: UIViewController {
         }
     }
     
-    private func updateAvatar() {
+    func updateAvatar() {
         guard
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL)
