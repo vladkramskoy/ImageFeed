@@ -24,6 +24,8 @@
 		8D7B60002B8B7EF60069FFF4 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B5FFF2B8B7EF60069FFF4 /* WebViewViewController.swift */; };
 		8D7BEE0E2BD16ACC00F58F98 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BEE0D2BD16ACC00F58F98 /* ProfileService.swift */; };
 		8D883D3C2C07B9C500B5FAB6 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D883D3B2C07B9C500B5FAB6 /* AuthHelper.swift */; };
+		8D8A22562C0E292400A71E39 /* WebViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8A22552C0E292400A71E39 /* WebViewPresenterSpy.swift */; };
+		8D8A22582C0E29B700A71E39 /* WebViewViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8A22572C0E29B700A71E39 /* WebViewViewControllerSpy.swift */; };
 		8D8E62732BC416220013FEA9 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8E62722BC416220013FEA9 /* OAuth2Service.swift */; };
 		8D8E62762BC469E10013FEA9 /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8E62752BC469E10013FEA9 /* URLSession+data.swift */; };
 		8D9351D62B63ECAA00B61E2B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9351D52B63ECAA00B61E2B /* ProfileViewController.swift */; };
@@ -65,6 +67,8 @@
 		8D7B5FFF2B8B7EF60069FFF4 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		8D7BEE0D2BD16ACC00F58F98 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		8D883D3B2C07B9C500B5FAB6 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
+		8D8A22552C0E292400A71E39 /* WebViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterSpy.swift; sourceTree = "<group>"; };
+		8D8A22572C0E29B700A71E39 /* WebViewViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerSpy.swift; sourceTree = "<group>"; };
 		8D8E62722BC416220013FEA9 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		8D8E62752BC469E10013FEA9 /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
 		8D9351D52B63ECAA00B61E2B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				8D7079862C0B2C9E00FC129B /* WebViewTests.swift */,
+				8D8A22572C0E29B700A71E39 /* WebViewViewControllerSpy.swift */,
+				8D8A22552C0E292400A71E39 /* WebViewPresenterSpy.swift */,
 			);
 			path = ImageFeedTests;
 			sourceTree = "<group>";
@@ -188,6 +194,11 @@
 		8DCBDC222B24C09A001620E7 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				8DCBDC232B24C09A001620E7 /* AppDelegate.swift */,
+				8DCBDC252B24C09A001620E7 /* SceneDelegate.swift */,
+				8D7217C82B8B2FDF0023EB63 /* AuthConfiguration.swift */,
+				8DC5DD112BD0785F008552BA /* UIBlockingProgressHUD.swift */,
+				8D6FDF3F2BDFB22E00CD8DF8 /* TabBarController.swift */,
 				8D4A199E2BCD493B00C81FC4 /* Splash */,
 				8D8E62742BC469B60013FEA9 /* Helpers */,
 				8D8E62712BC415E40013FEA9 /* Services */,
@@ -195,11 +206,6 @@
 				8D6676E52B6A5931002C0C75 /* SingleImageView */,
 				8DE130712B64264A00953FD2 /* Profile */,
 				8D7B5FFE2B8B72650069FFF4 /* Auth */,
-				8DC5DD112BD0785F008552BA /* UIBlockingProgressHUD.swift */,
-				8D6FDF3F2BDFB22E00CD8DF8 /* TabBarController.swift */,
-				8D7217C82B8B2FDF0023EB63 /* AuthConfiguration.swift */,
-				8DCBDC232B24C09A001620E7 /* AppDelegate.swift */,
-				8DCBDC252B24C09A001620E7 /* SceneDelegate.swift */,
 				8DCBDC292B24C09A001620E7 /* Main.storyboard */,
 				8DCBDC2C2B24C09C001620E7 /* Assets.xcassets */,
 				8DCBDC2E2B24C09C001620E7 /* LaunchScreen.storyboard */,
@@ -328,6 +334,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D7079872C0B2C9E00FC129B /* WebViewTests.swift in Sources */,
+				8D8A22582C0E29B700A71E39 /* WebViewViewControllerSpy.swift in Sources */,
+				8D8A22562C0E292400A71E39 /* WebViewPresenterSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

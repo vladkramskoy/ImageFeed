@@ -72,45 +72,22 @@ final class WebViewTests: XCTestCase {
         XCTAssertTrue(urlString.contains("code"))
         XCTAssertTrue(urlString.contains(configuration.accessScope))
     }
-}
-
-final class WebViewPresenterSpy: WebViewPresenterProtocol {
-    var viewDidLoadCalled: Bool = false
-    var view: WebViewViewControllerProtocol?
-    var request: URLRequest? = nil
     
-
-    
-    func viewDidLoad() {
-        viewDidLoadCalled = true
+    func testCodeFromURL() {
+        // Given
+        guard var urlComponents = URLComponents(string: "https://unsplash.com/oauth/authorize/native") else { return }
+        var queryItems = urlComponents.queryItems ?? [URLQueryItem]()
+        queryItems.append(URLQueryItem(name: "code", value: "test code"))
+        urlComponents.queryItems = queryItems
         
-        let url = URL(string: "https://example.com")
-        request = URLRequest(url: url!)
-        view?.load(request: request!)
-    }
-    
-    func didUpdateProgressValue(_ newValue: Double) {
+        guard let url = urlComponents.url else { return }
+        let configuration = AuthConfiguration.standart
+        let authHelper = AuthHelper(configuration: configuration)
         
-    }
-    
-    func code(from url: URL) -> String? {
-        return nil
-    }
-}
-
-final class WebViewViewControllerSpy: WebViewViewControllerProtocol {
-    var loadRequest: Bool = false
-    var presenter: WebViewPresenterProtocol?
-    
-    func load(request: URLRequest) {
-        loadRequest = true
-    }
-    
-    func setProgressValue(_ newValue: Float) {
+        // When
+        let code = authHelper.code(from: url)
         
-    }
-    
-    func setProgressHidden(_ isHidden: Bool) {
-        
+        // Then
+        XCTAssertEqual(code, "test code")
     }
 }
