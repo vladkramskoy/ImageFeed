@@ -30,6 +30,19 @@ final class WebViewTests: XCTestCase {
         // Then
         XCTAssertTrue(viewController.loadRequest)
     }
+    
+    func testProgressVisibleWhenLessThenOne() {
+        // Given
+        let authHelper = AuthHelper()
+        let presenter = WebViewPresenter(authHelper: authHelper)
+        let progress: Float = 0.6
+        
+        // When
+        let shouldHideProgress = presenter.shouldHideProgress(for: progress)
+        
+        // Then
+        XCTAssertFalse(shouldHideProgress)
+    }
 }
 
 final class WebViewPresenterSpy: WebViewPresenterProtocol {
