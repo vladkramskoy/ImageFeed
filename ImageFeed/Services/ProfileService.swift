@@ -60,11 +60,11 @@ struct ProfileResult: Codable {
 }
 
 public struct Profile {
-    let username: String
-    let firstName: String
-    let lastName: String?
-    let loginName: String
-    let bio: String?
+    public let username: String
+    public let firstName: String
+    public let lastName: String?
+    public let loginName: String
+    public let bio: String?
     
-    var name: String { firstName + " " + (lastName ?? "") }
+    public var name: String { firstName + " " + (lastName ?? "") }
 }
