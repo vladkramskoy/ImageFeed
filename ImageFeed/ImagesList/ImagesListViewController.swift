@@ -28,6 +28,7 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.accessibilityIdentifier = "tableViewImagesList"
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         self.addImageListObserver()
         ImagesListService.shared.fetchPhotosNextPage()
@@ -93,7 +94,7 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
 extension ImagesListViewController {
     private func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let photos = ImagesListService.shared.photos
-
+        
         if let url = URL(string: photos[indexPath.row].thumbImageURL) {
             cell.cellImage.kf.indicatorType = .activity
             cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "stub")) { [weak self] result in
@@ -152,8 +153,11 @@ extension ImagesListViewController: UITableViewDelegate {
 extension ImagesListViewController {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row + 1 == ImagesListService.shared.photos.count {
-            ImagesListService.shared.fetchPhotosNextPage()
+        let isTesting = ProcessInfo().arguments.contains("testMode")
+        if !isTesting {
+            if indexPath.row + 1 == ImagesListService.shared.photos.count {
+                ImagesListService.shared.fetchPhotosNextPage()
+            }
         }
     }
 }
