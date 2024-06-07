@@ -28,7 +28,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         webView.accessibilityIdentifier = "WebView"
         progressView.progressViewStyle = .bar
         estimatedProgressObservation = webView.observe(\.estimatedProgress, options: [], changeHandler: { [weak self] _, _ in // KVO
-            guard let self = self else { return }
+            guard let self else { return }
             presenter?.didUpdateProgressValue(webView.estimatedProgress)
         })
         
