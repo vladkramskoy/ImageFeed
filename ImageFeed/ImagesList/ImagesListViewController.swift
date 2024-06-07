@@ -1,7 +1,12 @@
 import UIKit
 import Kingfisher
 
-final class ImagesListViewController: UIViewController {
+public protocol ImagesListViewControllerProtocol: AnyObject {
+    func addImageListObserver()
+    func updateTableViewAnimated()
+}
+
+final class ImagesListViewController: UIViewController & ImagesListViewControllerProtocol {
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private var photos: [Photo] = []
     private var imageListServiceObserver: NSObjectProtocol?
@@ -23,11 +28,9 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.accessibilityIdentifier = "tableViewImagesList"
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        
-        imageListServiceObserver = NotificationCenter.default.addObserver(forName: ImagesListService.didChangeNotification, object: nil, queue: .main) { _ in
-            self.updateTableViewAnimated()
-        }
+        self.addImageListObserver()
         ImagesListService.shared.fetchPhotosNextPage()
     }
     
@@ -46,9 +49,15 @@ final class ImagesListViewController: UIViewController {
         }
     }
     
-    // MARK: - Private func
-
-    private func updateTableViewAnimated() {
+    // MARK: - Internal func
+    
+    func addImageListObserver() {
+        imageListServiceObserver = NotificationCenter.default.addObserver(forName: ImagesListService.didChangeNotification, object: nil, queue: .main) { _ in
+            self.updateTableViewAnimated()
+        }
+    }
+    
+    func updateTableViewAnimated() {
         DispatchQueue.main.async {
             let oldCount = self.photos.count
             let newCount = ImagesListService.shared.photos.count
@@ -68,6 +77,8 @@ final class ImagesListViewController: UIViewController {
         }
     }
     
+    // MARK: - Private func
+    
     private func showAlert(error: Error) {
         let alertController = UIAlertController(title: "Что-то пошло не так(", message: "Не удалось поставить лайк. \(error.localizedDescription)", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ок", style: .default) { _ in
@@ -83,7 +94,7 @@ final class ImagesListViewController: UIViewController {
 extension ImagesListViewController {
     private func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let photos = ImagesListService.shared.photos
-
+        
         if let url = URL(string: photos[indexPath.row].thumbImageURL) {
             cell.cellImage.kf.indicatorType = .activity
             cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "stub")) { [weak self] result in
@@ -142,8 +153,11 @@ extension ImagesListViewController: UITableViewDelegate {
 extension ImagesListViewController {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row + 1 == ImagesListService.shared.photos.count {
-            ImagesListService.shared.fetchPhotosNextPage()
+        let isTesting = ProcessInfo().arguments.contains("testMode")
+        if !isTesting {
+            if indexPath.row + 1 == ImagesListService.shared.photos.count {
+                ImagesListService.shared.fetchPhotosNextPage()
+            }
         }
     }
 }
